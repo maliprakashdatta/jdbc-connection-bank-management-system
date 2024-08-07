@@ -32,7 +32,6 @@ public class CardService {
         System.out.println(cardType.equals("CREDIT") ? "You have entered Credit." : cardType.equals("DEBIT") ? "You have entered Debit." : "Invalid input. Please enter 'Credit' or 'Debit'.");
         scanner2.close();
 
-
         Card card=new Card(cardId,cardNo, accountNo,accountHolderName,cvv,cardType);
 
         try {
