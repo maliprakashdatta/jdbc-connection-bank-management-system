@@ -26,7 +26,7 @@ public class CardRepository
 
             // Your database operations here...
             Statement statement = connection.createStatement();
-            ResultSet ResultSet1 = statement.executeQuery("SELECT * FROM atm_card");
+            ResultSet ResultSet1 = statement.executeQuery("SELECT * FROM card");
 
             // Iterate over the result set
             while (ResultSet1.next())
