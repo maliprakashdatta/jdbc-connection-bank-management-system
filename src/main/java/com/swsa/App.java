@@ -14,7 +14,7 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
         do {
-            //Runtime.getRuntime().exec("reset");
+
             System.out.println("*** SWAMISAMARTH BANK MANAGEMENT SYSTEM ***");
             System.out.println("_______________________________");
             System.out.println("Select operation:");
@@ -22,11 +22,10 @@ public class App {
             System.out.println("2. Saving Account");
             System.out.println("3. Deposit Account ");
             System.out.println("4. Withdraw Amount");
-            System.out.println("5. --------------");
-            System.out.println("0. Exit");
+            System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
-            choice = Integer.parseInt(scanner.nextLine());
-
+            choice = scanner.nextInt();
+            scanner.nextLine();
             switch (choice) {
 
                 case 1:
@@ -45,15 +44,7 @@ public class App {
                     System.out.println("Withdraw Account ");
                     //withdrawAccountServices.insertWithdrawAccount();
                     break;
-
                 case 5:
-                    System.out.println("Account");
-                  //  accountService.insertAccount();
-//                    StudentService.retrieveAddresses().forEach(address -> {
-//                        System.out.println("Address ID: " + address.getAddressId() + ", City: " + address.getCity());
-//                    });
-                    break;
-                case 0:
                     System.out.println("Exiting program");
                     break;
                 default:
