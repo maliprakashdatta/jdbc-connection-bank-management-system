@@ -27,8 +27,11 @@ public class CardService {
         int cvv = scanner.nextInt();
 
         Scanner scanner2 = new Scanner(System.in);
-        System.out.println("Pls enter cardType:");
-        String cardType = scanner2.nextLine();
+        System.out.print("Enter your card type (Credit/Debit): ");
+        String cardType = scanner2.nextLine().trim().toUpperCase();
+        System.out.println(cardType.equals("CREDIT") ? "You have entered Credit." : cardType.equals("DEBIT") ? "You have entered Debit." : "Invalid input. Please enter 'Credit' or 'Debit'.");
+        scanner2.close();
+
 
         Card card=new Card(cardId,cardNo, accountNo,accountHolderName,cvv,cardType);
 
