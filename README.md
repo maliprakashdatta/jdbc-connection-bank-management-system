@@ -2,7 +2,7 @@
 Java Database Connectivity (JDBC) is a Java API that manages connecting and executing queries with databases. It is a part of the Java Standard Edition platform, from Oracle Corporation. JDBC allows you to connect to a database, execute SQL queries, and retrieve results.
 
 <h3>Key Components of JDBC</h3>
-JDBC Drivers: JDBC drivers are required to establish communication with a database. There are four types of JDBC drivers:
+<h5>JDBC Drivers:</h5> JDBC drivers are required to establish communication with a database. There are four types of JDBC drivers:
 
 Type 1: JDBC-ODBC Bridge Driver
 Type 2: Native-API Driver
