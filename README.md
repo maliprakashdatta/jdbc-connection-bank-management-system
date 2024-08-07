@@ -1,4 +1,4 @@
---<h2>jdbc Connection Bank Management Systems---</h2>
+--<h2>jdbc connection bank management systems---</h2>
 Java Database Connectivity (JDBC) is a Java API that manages connecting and executing queries with databases. It is a part of the Java Standard Edition platform, from Oracle Corporation. JDBC allows you to connect to a database, execute SQL queries, and retrieve results.
 
 Key Components of JDBC
