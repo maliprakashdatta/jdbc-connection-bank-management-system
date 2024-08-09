@@ -14,7 +14,7 @@ public class App {
         CardService cardService=new CardService();
         AccountService accountService=new AccountService();
         Scanner scanner = new Scanner(System.in);
-        int  choice = 5;
+        int  choice = 0;
         do {
 
             System.out.println("*** SWAMISAMARTH BANK MANAGEMENT SYSTEM ***");
@@ -41,19 +41,19 @@ public class App {
                     break;
                 case 3:
                     System.out.println("Deposit Account ");
-                    //depositAccountServices.insertDepositAccount();
+                    // accountService.insertDepositAccount();
                     break;
                 case 4:
                     System.out.println("Withdraw Account ");
-                    //withdrawAccountServices.insertWithdrawAccount();
+                    // accountService.insertWithdrawAccount();
                     break;
-                case 5:
+                case 0:
                     System.out.println("Exiting program");
                     break;
                 default:
                     System.out.println("Invalid choice");
             }
-        } while (choice != 5);
+        } while (choice != 0);
         scanner.close();
     }
 }
