@@ -1,4 +1,5 @@
 package com.swsa;
+import com.swsa.service.AccountService;
 import com.swsa.service.CardService;
 import com.swsa.service.ConnectionService;
 import java.io.IOException;
@@ -11,21 +12,23 @@ public class App {
     public static void main(String[] args) throws IOException {
 
         CardService cardService=new CardService();
+        AccountService accountService=new AccountService();
         Scanner scanner = new Scanner(System.in);
-        int choice = 0;
+        int  choice = 5;
         do {
 
             System.out.println("*** SWAMISAMARTH BANK MANAGEMENT SYSTEM ***");
             System.out.println("_______________________________");
             System.out.println("Select operation:");
             System.out.println("1. Applying Card");
-            System.out.println("2. Saving Account");
+            System.out.println("2. Open New Account");
             System.out.println("3. Deposit Account ");
             System.out.println("4. Withdraw Amount");
             System.out.println("5. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine();
+            //choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
 
                 case 1:
@@ -33,8 +36,8 @@ public class App {
                     cardService.insertCard();
                     break;
                 case 2:
-                    System.out.println("Applying new for Account");
-                    //savingAccountService.insertSavingAccount();
+                    System.out.println("Applying for new  Account");
+                    accountService.insertNewAccount();
                     break;
                 case 3:
                     System.out.println("Deposit Account ");
@@ -50,7 +53,7 @@ public class App {
                 default:
                     System.out.println("Invalid choice");
             }
-        } while (choice != 0);
+        } while (choice != 5);
         scanner.close();
     }
 }
