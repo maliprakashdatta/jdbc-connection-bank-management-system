@@ -49,9 +49,6 @@ public class AccountService {
             System.out.println("Pls enter accountHolderName:");
             String accountHolderName = scanner3.nextLine();
 
-            //System.out.println("Pls enter gender:");//add option male and Female
-            //String gender= scanner.nextLine();
-
            Scanner scanner4 = new Scanner(System.in);
 
             // Prompt the user for gender selection
