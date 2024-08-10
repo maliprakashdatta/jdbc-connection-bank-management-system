@@ -2,8 +2,9 @@ package com.swsa.repository;
 import com.swsa.model.Account;
 import com.swsa.service.ConnectionService;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 public class AccountRepository {
 
 
@@ -14,8 +15,17 @@ public class AccountRepository {
                 connection = new ConnectionService().getConnection();
             }
         }
-        public List<Account> retrieverAccount() {
-            List<Account> accounts = new ArrayList<>();
+
+//    public void addAccount(Account account) {
+//        accounts.put(account.getAccountNumber(), account);
+//    }
+String accountNumber;
+    String accountHolderName;
+    double balance;
+    double  amount;
+
+    public Map<String,Account> retrieverAccount() {
+          Map<String, Account> accountMap = new HashMap<>();
             // Use the connection to execute SQL queries and interact with the database
             try {
                 this.initConnection();
@@ -26,23 +36,15 @@ public class AccountRepository {
 
                 // Iterate over the result set
                 while (resultSet.next()) {
-                    long accountNo=resultSet.getLong("accountNo");
-                    double balance = resultSet.getDouble("balance");
-                    long mobileNo=resultSet.getLong("mobileNo");
-                    String accountType=resultSet.getString("accountType");
-                    String branchName = resultSet.getString("branchName");
-                    String accountHolderName = resultSet.getString("accountHolderName");
-                    String gender = resultSet.getString("gender");
-                    String dob= resultSet.getString("dob");
-                    String address = resultSet.getString("address");
-                    String emailId = resultSet.getString("emailId");
-                    long aadhaarNo = resultSet.getLong("aadhaarNo");
+                    String accountNumber=resultSet.getString("accountNo");
+                    String accountHolderName=resultSet.getString("accountHolderName");
+                    //double balance = resultSet.getDouble("balance");
+                    double amount = resultSet.getDouble("amount");
 
                     // Do something with the data, e.g., print it
-
-                    Account account= new Account(accountNo, balance,mobileNo,accountType, branchName,accountHolderName, gender, dob, address,  emailId, aadhaarNo);
-
-                    accounts.add(account);
+                    Account account= new Account(accountNumber,accountHolderName,amount);
+                    accountMap.put(account.getAccountNumber(), account);
+                    //accountMap.add(account);
                 }
             } catch (SQLException e) {
                 System.err.println("SQL error: " + e.getMessage());
@@ -56,25 +58,19 @@ public class AccountRepository {
                     }
                 }
             }
-            return accounts;
+            return accountMap;
         }
 
         // Method to update user data into the database
-        public boolean insertNewAccount(Account account) throws SQLException {
+        public boolean insertNewCustomer(Account account) throws SQLException {
             this.initConnection();
-            String query = "INSERT INTO account VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO account VALUES (?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection. prepareStatement(query)) {
 
-                preparedStatement.setLong(1, account.getAccountNo());
-                preparedStatement.setDouble(2, account.getBalance());
-                preparedStatement.setLong(3,account.getMobileNo());
-                preparedStatement.setString(4, account.getAccountType());
-                preparedStatement.setString(5, account.getBranchName());
-                preparedStatement.setString(6, account.getAccountHolderName());
-                preparedStatement.setString(7,account.getGender());
-                preparedStatement.setString(8,account.getDob());
-                preparedStatement.setString(9,account.getEmailId());
-                preparedStatement.setLong(10,account.getAadhaarNo());
+                preparedStatement.setString(1, account.getAccountNumber());
+                preparedStatement.setString(2, account.getAccountHolderName());
+                //preparedStatement.setDouble(3, account.getBalance());
+                preparedStatement.setDouble(3, account.getAmount());
 
                 System.out.println("inseret  data successfully .. : " + account);
 
@@ -92,20 +88,13 @@ public class AccountRepository {
         public boolean updateAccount(Account account) throws SQLException {
             this.initConnection();
 
-            String query = "UPDATE opennewaccount SET   AccountNo= ?, balance= ?, MobileNo = ?," +
-                    "AccountType = ?,BranchName= ?,AccountHolderName= ?,Gender= ?,dob= ?,EmailId= ?,AadhaarNo= ?";
+            String query = "UPDATE opennewaccount SET   AccountNumber= ?, AccountHolderName= ?, Balance = ?,Amount()";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query))
             {
-                preparedStatement.setLong(1, account.getAccountNo());
-                preparedStatement.setDouble(2, account.getBalance());
-                preparedStatement.setLong(3,account.getMobileNo());
-                preparedStatement.setString(4, account.getAccountType());
-                preparedStatement.setString(5, account.getBranchName());
-                preparedStatement.setString(6, account.getAccountHolderName());
-                preparedStatement.setString(7,account.getGender());
-                preparedStatement.setString(8,account.getDob());
-                preparedStatement.setString(9,account.getEmailId());
-                preparedStatement.setLong(10,account.getAadhaarNo());
+                preparedStatement.setString(1, account.getAccountNumber());
+                preparedStatement.setString(2, account.getAccountHolderName());
+                preparedStatement.setDouble(3, account.getBalance());
+                preparedStatement.setDouble(3, account.getAmount());
 
                 System.out.println("updating  Account data to table: " + account);
 
