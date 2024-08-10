@@ -16,7 +16,7 @@ public class App {
         CardService cardService=new CardService();
         AccountService accountService=new AccountService();
 
-        CustomerService customerService=new CustomerService();
+        //CustomerService customerService=new CustomerService();
         Scanner scanner = new Scanner(System.in);
         int  choice = 0;
         do {
@@ -41,15 +41,16 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Applying for new Customer");
-                    customerService.insertNewCustomer();
+                    //accountService.createAccount();
+                    accountService.insertNewCustomer();
                     break;
                 case 3:
                     System.out.println("Deposit Account/Debit ");
-                    accountService.depositMoney();
+                    //accountService.depositMoney();
                     break;
                 case 4:
                     System.out.println("Withdraw Account/Credit ");
-                    accountService.withdrawMoney();
+                   // accountService.withdrawMoney();
                     break;
                 case 0:
                     System.out.println("Exiting program");
@@ -61,16 +62,5 @@ public class App {
         scanner.close();
     }
 
-
-    private static void createAccount() {
-        System.out.print("Enter account number: ");
-        String accountNumber = scanner.nextLine();
-        System.out.print("Enter account holder name: ");
-        String accountHolderName = scanner.nextLine();
-        System.out.print("Enter initial deposit amount: ");
-        double initialDeposit = scanner.nextDouble();
-        scanner.nextLine();  // Consume newline
-        accountService.createAccount(accountNumber, accountHolderName, initialDeposit);
     }
 
-}
