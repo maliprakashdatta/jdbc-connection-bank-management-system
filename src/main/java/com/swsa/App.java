@@ -1,4 +1,5 @@
 package com.swsa;
+import com.swsa.service.AccountService;
 import com.swsa.service.CardService;
 import com.swsa.service.ConnectionService;
 import com.swsa.service.CustomerService;
@@ -13,7 +14,7 @@ public class App {
     public static void main(String[] args) throws IOException {
 
         CardService cardService=new CardService();
-        //AccountService accountService=new AccountService();
+        AccountService accountService=new AccountService();
 
         CustomerService customerService=new CustomerService();
         Scanner scanner = new Scanner(System.in);
@@ -41,15 +42,14 @@ public class App {
                 case 2:
                     System.out.println("Applying for new Customer");
                     customerService.insertNewCustomer();
-
                     break;
                 case 3:
                     System.out.println("Deposit Account/Debit ");
-                   // accountService.depositMoney();
+                    accountService.depositMoney();
                     break;
                 case 4:
                     System.out.println("Withdraw Account/Credit ");
-                    // accountService.insertWithdrawAccount();
+                    accountService.withdrawMoney();
                     break;
                 case 0:
                     System.out.println("Exiting program");
@@ -60,4 +60,17 @@ public class App {
         } while (choice != 0);
         scanner.close();
     }
+
+
+    private static void createAccount() {
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+        System.out.print("Enter account holder name: ");
+        String accountHolderName = scanner.nextLine();
+        System.out.print("Enter initial deposit amount: ");
+        double initialDeposit = scanner.nextDouble();
+        scanner.nextLine();  // Consume newline
+        accountService.createAccount(accountNumber, accountHolderName, initialDeposit);
+    }
+
 }
