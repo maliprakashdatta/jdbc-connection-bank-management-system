@@ -6,103 +6,84 @@ import java.util.Scanner;
 
 public class AccountService {
 
-        private static final AccountRepository accountRepository= new AccountRepository();
+    private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
 
-        public static void insertNewAccount() {
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Pls enter accountNo:");
-            long accountNo = scanner.nextLong();
+        public static void insertNewCustomer()        {
+            Scanner scanner=new Scanner(System.in);
+            System.out.print("Enter account number: ");
+            String accountNumber = scanner.nextLine();
+            System.out.print("Enter account holder name: ");
+            String accountHolderName = scanner.nextLine();
+            System.out.print("Enter initial deposit amount: ");
+            double amount=scanner.nextDouble();
+            scanner.nextLine();  // Consume newline
+          Account account1=new Account(accountNumber,accountHolderName,amount);
 
-            System.out.println("Pls enter balance :");//Deposit and withdraw
-            double balance = scanner.nextDouble();
-
-            System.out.println("Pls enter mobileNo:");
-            long mobileNo = scanner.nextLong();
-
-            Scanner scanner1 = new Scanner(System.in);
-            System.out.println("Select account type Saving/Current (S/C): ");
-            String accountTypeInput = scanner1.nextLine().trim().toUpperCase();
-
-            String accountType;
-            switch (accountTypeInput) {
-                case "S":
-                    accountType = "Saving";
-                    break;
-                case "C":
-                    accountType = "Current";
-                    break;
-                default:
-                    accountType = "Unspecified";
-                    System.out.println("Invalid input, account type set to Unspecified.");
-                    break;
+        try {
+            if (ACCOUNT_REPOSITORY.insertNewCustomer(account1)) {
+                System.out.println(" Account Open  successfully!");
+            } else {
+                System.out.println(" Account not Open .");
             }
-
-            // Output the selected account type
-            System.out.println("Selected account type: " + accountType);
-
-           Scanner scanner2 = new Scanner(System.in);
-            System.out.println("Pls enter branchName:");
-            String branchName = scanner2.nextLine();
-
-           Scanner scanner3 = new Scanner(System.in);
-            System.out.println("Pls enter accountHolderName:");
-            String accountHolderName = scanner3.nextLine();
-
-           Scanner scanner4 = new Scanner(System.in);
-
-            // Prompt the user for gender selection
-            System.out.println("Select gender (M/F/O): ");
-            String genderInput = scanner4.nextLine().trim().toUpperCase();
-
-            String gender;
-            switch (genderInput) {
-                case "M":
-                    gender = "Male";
-                    break;
-                case "F":
-                    gender = "Female";
-                    break;
-                case "O":
-                    gender = "Other";
-                    break;
-                default:
-                    gender = "Unspecified";
-                    System.out.println("Invalid input, gender set to Unspecified.");
-                    break;
-            }
-            // Output the selected gender
-            System.out.println("Selected gender: " + gender);
-
-            Scanner scanner5 = new Scanner(System.in);
-            System.out.println("Pls enter bob:");
-            String dob = scanner5.nextLine();
-
-            Scanner scanner6 = new Scanner(System.in);
-            System.out.println("Pls enter address:");
-            String address = scanner6.nextLine();
-
-            Scanner scanner7 = new Scanner(System.in);
-            System.out.println("Pls enter EmailId:");
-            String emailId = scanner7.nextLine();
-            Scanner scanner8 = new Scanner(System.in);
-            System.out.println("Pls enter AadhaarNo");
-            long aadhaarNo = scanner8.nextLong();
-
-            Account account = new Account(accountNo, balance, mobileNo, accountType, branchName, accountHolderName, gender, dob, address, emailId, aadhaarNo);
-
-            try {
-                if (accountRepository.insertNewAccount(account)) {
-                    System.out.println(" Account data inserted successfully!");
-                } else {
-                    System.out.println("Failed to insert CAccount data.");
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
+        } catch (SQLException e)
+    {
+            throw new RuntimeException(e);
         }
-}
+
+    }}
+//
+//    private static void depositMoney(double amount)
+//    {
+//        Scanner scanner=new Scanner(System.in);
+//        System.out.print("Enter account number: ");
+//        String accountNumber = scanner.nextLine();
+//        System.out.print("Enter deposit amount: ");
+//        amount = scanner.nextDouble();
+//        scanner.nextLine();  // Consume newline
+//        Account account=new Account(accountNumber,amount);
+//        try {
+//            if (ACCOUNT_REPOSITORY.depositMoney( account)) {
+//                System.out.println(" Deposit Amount  successfully!");
+//            } else {
+//                System.out.println(" Account not Open .");
+//            }
+//        } catch (SQLException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
+//
+//    private static void withdrawMoney(double amount)
+//    {
+//        Scanner scanner=new Scanner(System.in);
+//        System.out.print("Enter account number: ");
+//        String accountNumber = scanner.nextLine();
+//        System.out.print("Enter withdrawal amount: ");
+//        amount = scanner.nextDouble();
+//        scanner.nextLine();  // Consume newline
+//        Account account2=new Account(accountNumber,amount);
+//        try {
+//            if (ACCOUNT_REPOSITORY.withdrawMoney(account2)) {
+//                System.out.println("  withdraw Money  successfully!");
+//            } else {
+//                System.out.println("Not withdraw Money  .");
+//            }
+//        } catch (SQLException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
+//
+//
+//
+//}
+
+
+
+
 
 
 
