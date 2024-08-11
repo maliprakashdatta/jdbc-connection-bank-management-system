@@ -8,8 +8,7 @@ public class AccountService {
 
     private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
 
-    public static void insertCustomerAccount()
-    {
+    public static void insertCustomerAccount() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
@@ -36,8 +35,7 @@ public class AccountService {
     }
 
 
-    public static void  depositMoney()
-    {
+    public static void insertdepositMoney() {
         double amount;
 
         Scanner scanner = new Scanner(System.in);
@@ -47,9 +45,9 @@ public class AccountService {
         System.out.print("Enter deposit amount: ");
         amount = scanner.nextDouble();
         scanner.nextLine();
-        Account account = new Account(accountNumber,amount);
+        Account account = new Account(accountNumber, amount);
         try {
-            if (ACCOUNT_REPOSITORY.depositMoney(account)) {
+            if (ACCOUNT_REPOSITORY.insertdepositMoney(account)) {
                 System.out.println(" Deposit Amount  successfully!");
             } else {
                 System.out.println(" Account not Open .");
@@ -59,31 +57,37 @@ public class AccountService {
         }
 
     }
-}
-/*
 
-    private static void withdrawMoney(double amount)
+    public void withdrawMoney()
     {
-        Scanner scanner=new Scanner(System.in);
+    }
+    public static void insertwithdrawMoney()
+    {
+        double amount;
+
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
+
         System.out.print("Enter withdrawal amount: ");
         amount = scanner.nextDouble();
+
         scanner.nextLine();  // Consume newline
-        Account account2=new Account(accountNumber,amount);
+        Account account3 = new Account(accountNumber, amount);
         try {
-            if (ACCOUNT_REPOSITORY.withdrawMoney(account2)) {
+            if (ACCOUNT_REPOSITORY.insertwithdrawMoney(account3)) {
                 System.out.println("  withdraw Money  successfully!");
             } else {
                 System.out.println("Not withdraw Money  .");
             }
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
     }
-*/
+
+
+}
 
 
 
