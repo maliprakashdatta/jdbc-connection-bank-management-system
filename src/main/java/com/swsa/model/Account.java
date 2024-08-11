@@ -6,8 +6,12 @@ public class Account {
     String accountHolderName;
     double balance;
 
-    public Account(String accountNumber, double balance) {
+    public Account(String accountNumber, String accountHolderName, double balance) {
     }
+
+    public Account(String accountNumber, double amount) {
+    }
+
     //Customer customer;
 
     public String getAccountNumber() {
