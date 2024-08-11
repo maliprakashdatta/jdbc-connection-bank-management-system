@@ -36,7 +36,34 @@ public class AccountRepository {
             }
             return false;
         }
+
+    // Method to update user data into the database
+    public boolean depositMoney(Account account) throws SQLException {
+        this.initConnection();
+        String query = "INSERT INTO account VALUES (?, ?)";
+        try (PreparedStatement preparedStatement = connection. prepareStatement(query)) {
+
+            preparedStatement.setString(1, account.getAccountNumber());
+            preparedStatement.setDouble(2, account.getBalance());
+            // preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
+
+            System.out.println("inseret  data successfully .. : " + account);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
+
+
+
+
+
+
 //}
 //
 //        // Method to update user data into the database
