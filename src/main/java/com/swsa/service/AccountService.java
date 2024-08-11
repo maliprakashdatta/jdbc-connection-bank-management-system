@@ -58,11 +58,10 @@ public class AccountService {
 
     }
 
-    public void withdrawMoney()
-    {
+    public void withdrawMoney() {
     }
-    public static void insertwithdrawMoney()
-    {
+
+    public static void insertwithdrawMoney() {
         double amount;
 
         Scanner scanner = new Scanner(System.in);
@@ -86,7 +85,24 @@ public class AccountService {
 
     }
 
+    public static void insertcheckBalance() {
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+        scanner.nextLine();  // Consume newline
+        Account account4 = new Account(accountNumber);
+        try {
+            if (ACCOUNT_REPOSITORY.insertcheckBalance(account4)) {
+                System.out.println(" Check Balance  successfully!");
+            } else {
+                System.out.println("Not withdraw Money  .");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }
 
 
