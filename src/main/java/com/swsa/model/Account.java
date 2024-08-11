@@ -12,6 +12,7 @@ public class Account {
     public Account(String accountNumber, double amount) {
     }
 
+
     //Customer customer;
 
     public String getAccountNumber() {
