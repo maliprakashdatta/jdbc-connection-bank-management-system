@@ -47,7 +47,7 @@ public class App {
 
                 case 3:
                     System.out.println("Deposit Account/Debit ");
-                    //accountService.depositMoney();
+                    accountService.depositMoney();
                     break;
                 case 4:
                     System.out.println("Withdraw Account/Credit ");
