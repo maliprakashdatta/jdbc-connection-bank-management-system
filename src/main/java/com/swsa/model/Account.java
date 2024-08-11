@@ -13,6 +13,9 @@ public class Account {
     }
 
 
+    public Account(String accountNumber) {
+    }
+
     //Customer customer;
 
     public String getAccountNumber() {
