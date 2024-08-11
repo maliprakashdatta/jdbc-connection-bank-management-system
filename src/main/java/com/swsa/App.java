@@ -14,9 +14,8 @@ public class App {
     public static void main(String[] args) throws IOException {
 
         CardService cardService=new CardService();
+        CustomerService customerService=new CustomerService();
         AccountService accountService=new AccountService();
-
-        //CustomerService customerService=new CustomerService();
         Scanner scanner = new Scanner(System.in);
         int  choice = 0;
         do {
@@ -28,7 +27,8 @@ public class App {
             System.out.println("2. Open New Customer Account");
             System.out.println("3. Deposit Account ");
             System.out.println("4. Withdraw Amount");
-            System.out.println("5. Exit");
+            System.out.println("5. Applying Customer");
+            System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine();
@@ -41,9 +41,10 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Applying for new Customer");
-                    //accountService.createAccount();
-                    accountService.insertNewCustomer();
+                    accountService.insertCustomerAccount();
+
                     break;
+
                 case 3:
                     System.out.println("Deposit Account/Debit ");
                     //accountService.depositMoney();
@@ -51,6 +52,11 @@ public class App {
                 case 4:
                     System.out.println("Withdraw Account/Credit ");
                    // accountService.withdrawMoney();
+                    break;
+
+                case 5:
+                    System.out.println("Applying Customer ");
+                    customerService.insertNewCustomer();
                     break;
                 case 0:
                     System.out.println("Exiting program");
