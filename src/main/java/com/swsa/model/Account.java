@@ -6,7 +6,7 @@ public class Account {
     String accountHolderName;
     double balance;
 
-    public Account(String accountNumber, String accountHolderName, double balance) {
+    public Account(String accountNumber, double balance) {
     }
     //Customer customer;
 
