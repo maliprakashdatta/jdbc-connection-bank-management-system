@@ -8,8 +8,8 @@ public class AccountService {
 
     private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
 
-
-    public static void insertCustomerAccount() {
+    public static void insertCustomerAccount()
+    {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
@@ -21,7 +21,7 @@ public class AccountService {
         double balance = scanner.nextDouble();
 
         scanner.nextLine();  // Consume newline
-        Account account1 = new Account(accountNumber, balance);
+        Account account1 = new Account(accountNumber, accountHolderName, balance);
 
         try {
             if (ACCOUNT_REPOSITORY.insertCustomerAccount(account1)) {
@@ -41,14 +41,12 @@ public class AccountService {
         double amount;
 
         Scanner scanner = new Scanner(System.in);
-
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
 
         System.out.print("Enter deposit amount: ");
         amount = scanner.nextDouble();
-
-        scanner.nextLine();  // Consume newline
+        scanner.nextLine();
         Account account = new Account(accountNumber,amount);
         try {
             if (ACCOUNT_REPOSITORY.depositMoney(account)) {
