@@ -42,16 +42,14 @@ public class App {
                 case 2:
                     System.out.println("Applying for new Customer");
                     accountService.insertCustomerAccount();
-
                     break;
-
                 case 3:
                     System.out.println("Deposit Account/Debit ");
-                    accountService.depositMoney();
+                    accountService.insertdepositMoney();
                     break;
                 case 4:
                     System.out.println("Withdraw Account/Credit ");
-                   // accountService.withdrawMoney();
+                     accountService.insertwithdrawMoney();
                     break;
 
                 case 5:
