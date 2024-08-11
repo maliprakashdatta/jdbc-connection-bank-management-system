@@ -125,7 +125,32 @@ public class AccountRepository {
         return false;
     }
 
+
+//----------------CHECK BALANCE-------------
+
+// Method to update user data into the database
+public boolean insertcheckBalance(Account account) throws SQLException {
+    this.initConnection();
+    String query = "INSERT INTO account VALUES (?,)";
+    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+        preparedStatement.setString(1, account.getAccountNumber());
+
+        System.out.println("Balance Check successfully .. : " + account);
+
+        int rowsInserted = preparedStatement.executeUpdate();
+
+        return rowsInserted > 0;
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return false;
 }
+
+}
+
+
+
 
 
 //}
