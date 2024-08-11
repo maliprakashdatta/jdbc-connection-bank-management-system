@@ -28,6 +28,7 @@ public class App {
             System.out.println("3. Deposit Account ");
             System.out.println("4. Withdraw Amount");
             System.out.println("5. Applying Customer");
+            System.out.println("6. check Balance");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
@@ -56,6 +57,11 @@ public class App {
                     System.out.println("Applying Customer ");
                     customerService.insertNewCustomer();
                     break;
+                case 6:
+                    System.out.println("Check Balance ");
+                    accountService.insertcheckBalance();
+                    break;
+
                 case 0:
                     System.out.println("Exiting program");
                     break;
