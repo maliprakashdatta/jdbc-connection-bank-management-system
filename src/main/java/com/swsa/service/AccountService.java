@@ -9,25 +9,29 @@ public class AccountService {
     private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
 
 
-        public static void insertNewCustomer()        {
-            Scanner scanner=new Scanner(System.in);
-            System.out.print("Enter account number: ");
-            String accountNumber = scanner.nextLine();
-            System.out.print("Enter account holder name: ");
-            String accountHolderName = scanner.nextLine();
-            System.out.print("Enter initial deposit amount: ");
-            double amount=scanner.nextDouble();
-            scanner.nextLine();  // Consume newline
-          Account account1=new Account(accountNumber,accountHolderName,amount);
+    public static void insertCustomerAccount()
+    {
+        Scanner scanner=new Scanner(System.in);
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        System.out.print("Enter account holder name: ");
+        String accountHolderName = scanner.nextLine();
+
+        System.out.print("Enter initial deposit amount: ");
+        double balance =scanner.nextDouble();
+
+        scanner.nextLine();  // Consume newline
+        Account account1=new Account(accountNumber,accountHolderName,balance);
 
         try {
-            if (ACCOUNT_REPOSITORY.insertNewCustomer(account1)) {
+            if (ACCOUNT_REPOSITORY.insertCustomerAccount(account1)) {
                 System.out.println(" Account Open  successfully!");
             } else {
                 System.out.println(" Account not Open .");
             }
         } catch (SQLException e)
-    {
+        {
             throw new RuntimeException(e);
         }
 
@@ -80,7 +84,6 @@ public class AccountService {
 //
 //
 //}
-
 
 
 
