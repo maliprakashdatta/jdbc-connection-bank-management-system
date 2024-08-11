@@ -1,7 +1,10 @@
 package com.swsa.repository;
 import com.swsa.model.Account;
+import com.swsa.model.Card;
 import com.swsa.service.ConnectionService;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AccountRepository {
@@ -14,11 +17,48 @@ public class AccountRepository {
                 connection = new ConnectionService().getConnection();
             }
         }
+    public List<Account> retrieveCard()
+    {
+        List<Account> accounts= new ArrayList<>();
+        // Use the connection to execute SQL queries and interact awith the database
+        try {
+            this.initConnection();
 
-        // Method to update user data into the database
+            // Your database operations here...
+            Statement statement = connection.createStatement();
+            ResultSet ResultSet1 = statement.executeQuery("SELECT * FROM account");
+
+            // Iterate over the result set
+            while (ResultSet1.next())
+            {
+                String accountNumber= ResultSet1.getString("AccountNumber");
+                String accountHolderName=ResultSet1.getString("AccountHolderName");
+                double balance=ResultSet1.getLong("balance");
+
+                // Do something with the data, e.g., print it
+                Account account=new Account(accountNumber,accountHolderName,balance);
+                accounts.add(account);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL error: " + e.getMessage());
+        } finally {
+            // Close the connection when done
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Error closing connection: " + e.getMessage());
+                }
+            }
+        }
+        return accounts;
+    }
+
+
+    // Method to update user data into the database
         public boolean insertCustomerAccount(Account account) throws SQLException {
             this.initConnection();
-            String query = "INSERT INTO account VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO account VALUES (?, ?, ?)";
             try (PreparedStatement preparedStatement = connection. prepareStatement(query)) {
 
                 preparedStatement.setString(1, account.getAccountNumber());
@@ -37,6 +77,10 @@ public class AccountRepository {
             return false;
         }
 
+
+
+
+        //---------------DEPOSIT ACOUNT-----------------------------
     // Method to update user data into the database
     public boolean depositMoney(Account account) throws SQLException {
         this.initConnection();
