@@ -2,28 +2,27 @@ package com.swsa.model;
 
 public class Customer {
 
-    String accountHolderName;
-    String gender;
+    int customerId;
+    String name;
     long mobileNo;
-    String dob;
     String address;
     String emailId;
     long aadhaarNo;
 
-    public String getAccountHolderName() {
-        return accountHolderName;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setAccountHolderName(String accountHolderName) {
-        this.accountHolderName = accountHolderName;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
-    public String getGender() {
-        return gender;
+    public String getName() {
+        return name;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public long getMobileNo() {
@@ -32,14 +31,6 @@ public class Customer {
 
     public void setMobileNo(long mobileNo) {
         this.mobileNo = mobileNo;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
     }
 
     public String getAddress() {
@@ -68,29 +59,28 @@ public class Customer {
 
 
 
-    public Customer(String accountHolderName, String gender, long mobileNo, String dob, String address, String emailId, long aadhaarNo) {
-        this.accountHolderName = accountHolderName;
-        this.gender = gender;
+    public Customer(int customerId, String name, long mobileNo, String address, String emailId, long aadhaarNo) {
+        this.customerId = customerId;
+        this.name = name;
         this.mobileNo = mobileNo;
-        this.dob = dob;
         this.address = address;
         this.emailId = emailId;
         this.aadhaarNo = aadhaarNo;
     }
+        @Override
+        public String toString() {
+            return "Customer{" +
+                    "customerId=" + customerId +
+                    ", name='" + name + '\'' +
+                    ", mobileNo=" + mobileNo +
+                    ", address='" + address + '\'' +
+                    ", emailId='" + emailId + '\'' +
+                    ", aadhaarNo=" + aadhaarNo +
+                    '}';
+        }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "accountHolderName='" + accountHolderName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", mobileNo=" + mobileNo +
-                ", dob='" + dob + '\'' +
-                ", address='" + address + '\'' +
-                ", emailId='" + emailId + '\'' +
-                ", aadhaarNo=" + aadhaarNo +
-                '}';
     }
 
 
 
-}
+
