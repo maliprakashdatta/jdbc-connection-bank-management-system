@@ -5,7 +5,7 @@ public class Account {
     String accountNumber;
     String accountHolderName;
     double balance;
-
+    Customer customer;
     public Account(String accountNumber, String accountHolderName, double balance) {
     }
 
@@ -43,18 +43,18 @@ public class Account {
     }
 
 
-    /*public Customer getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-    }*/
+    }
     public Account(String accountNumber, String accountHolderName, double balance, Customer customer) {
         this.accountNumber = accountNumber;
         this.accountHolderName = accountHolderName;
         this.balance = balance;
-        //this.customer = customer;
+        this.customer = customer;
     }
     @Override
     public String toString() {
@@ -62,7 +62,7 @@ public class Account {
                 "accountNumber='" + accountNumber + '\'' +
                 ", accountHolderName='" + accountHolderName + '\'' +
                 ", balance=" + balance +
-                //", customer=" + customer +
+                ", customer=" + customer +
                 '}';
     }
 
