@@ -59,7 +59,9 @@ public class App {
                     break;
                 case 6:
                     System.out.println("Check Balance ");
-                    accountService.insertcheckBalance();
+                    accountService.checkBalance();
+                    double balance = accountService.checkBalance();
+                    System.out.println("Checked balance: $" + balance);
                     break;
 
                 case 0:
