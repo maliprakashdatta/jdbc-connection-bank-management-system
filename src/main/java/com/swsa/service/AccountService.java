@@ -109,25 +109,29 @@ public class AccountService {
         }
 
     }
+    public double checkBalance() {
+        return 0;
+    }
+    public static double checkBalance(Account account)
 
-    public static void insertcheckBalance() {
-
+    {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
-        scanner.nextLine();  // Consume newline
+       // scanner.nextLine();  // Consume newline
         Account account4 = new Account(accountNumber);
-        try {
-            if (ACCOUNT_REPOSITORY.insertcheckBalance(account4)) {
-                System.out.println(" Check Balance  successfully!");
-            } else {
-                System.out.println("Not withdraw Money  .");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        scanner.nextLine();  // Consume newline
+        double balance = checkBalance(account);
+        System.out.println("The current balance for account " + account.getAccountNumber() + " is $" + balance);
+        System.out.println("The balance of account " + account.getAccountNumber() + " is $" + account.getBalance());
+        return account4.getBalance();
+
+
+
 
     }
+
+
 }
 
 
