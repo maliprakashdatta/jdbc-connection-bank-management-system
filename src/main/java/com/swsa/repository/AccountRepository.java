@@ -129,7 +129,7 @@ public class AccountRepository {
 //----------------CHECK BALANCE-------------
 
 // Method to update user data into the database
-public boolean insertcheckBalance(Account account) throws SQLException {
+public boolean  checkBalance(Account account) throws SQLException {
     this.initConnection();
     String query = "INSERT INTO account VALUES (?,)";
     try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
