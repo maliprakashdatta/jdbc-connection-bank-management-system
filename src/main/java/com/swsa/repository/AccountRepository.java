@@ -1,6 +1,6 @@
 package com.swsa.repository;
 import com.swsa.model.Account;
-import com.swsa.model.Card;
+import com.swsa.model.Customer;
 import com.swsa.service.ConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +18,14 @@ public class AccountRepository {
         }
     }
 
-    public List<Account> retrieveCard() {
+    public Customer retrieverCustomer(int customerId)
+    {
+        return null;
+    }
+    public List<Account> retrieveCard()
+    {
+
+
         List<Account> accounts = new ArrayList<>();
         // Use the connection to execute SQL queries and interact awith the database
         try {
