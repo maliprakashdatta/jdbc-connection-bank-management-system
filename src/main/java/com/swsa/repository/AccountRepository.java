@@ -40,6 +40,7 @@ public class AccountRepository {
                 String accountNumber = ResultSet1.getString("AccountNumber");
                 String accountHolderName = ResultSet1.getString("AccountHolderName");
                 double balance = ResultSet1.getLong("balance");
+                int customerId = ResultSet1.getInt("customerId");
 
                 // Do something with the data, e.g., print it
                 Account account = new Account(accountNumber, accountHolderName, balance);
@@ -64,13 +65,13 @@ public class AccountRepository {
     // Method to update user data into the database
     public boolean insertCustomerAccount(Account account) throws SQLException {
         this.initConnection();
-        String query = "INSERT INTO account VALUES (?, ?, ?)";
+        String query = "INSERT INTO account VALUES (?, ?, ?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, account.getAccountNumber());
             preparedStatement.setString(2, account.getAccountHolderName());
             preparedStatement.setDouble(3, account.getBalance());
-            // preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
+            preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
 
             System.out.println("inseret  data successfully .. : " + account);
 
