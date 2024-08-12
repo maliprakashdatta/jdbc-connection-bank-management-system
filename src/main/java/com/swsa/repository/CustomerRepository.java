@@ -21,20 +21,22 @@ public class CustomerRepository {
     String emailId;
     long aadhaarNo;*/
 
-    public List<Customer> retrieverCustomer()
+    public List<Customer> retrieverCustomer(int customerId)
+
     {
+        Customer customer = null;
         List<Customer> customers = new ArrayList<>();
         // Use the connection to execute SQL queries and interact with the database
         try {
             this.initConnection();
-
             // Your database operations here...
             Statement statement= connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
+           // ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
+           ResultSet resultSet = statement.executeQuery("SELECT * FROM customer where customerId = " + customerId);
             // Iterate over the result set
             while (resultSet.next()) {
 
-                int customerId = resultSet.getInt("customerId");
+                customerId = resultSet.getInt("customerId");
                 String name = resultSet.getString("name");
                 long mobileNo=resultSet.getLong("mobileNo");
                 String address = resultSet.getString("address");
@@ -42,7 +44,7 @@ public class CustomerRepository {
                 long aadhaarNo = resultSet.getLong("aadhaarNo");
                 // Do something with the data, e.g., print it
 
-                Customer customer=new Customer(customerId,name,mobileNo,address,emailId,aadhaarNo);
+                customer = new Customer(customerId, name, mobileNo, address, emailId, aadhaarNo);
 
                 customers.add(customer);
             }
@@ -60,6 +62,7 @@ public class CustomerRepository {
         }
         return customers;
     }
+
 
     // Method to update user data into the database
     public boolean insertNewCustomer(Customer customer) throws SQLException {
