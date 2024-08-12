@@ -22,6 +22,10 @@ public class AccountService {
         scanner.nextLine();  // Consume newline
         Account account1 = new Account(accountNumber, accountHolderName, balance);
 
+
+
+
+
         try {
             if (ACCOUNT_REPOSITORY.insertCustomerAccount(account1)) {
                 System.out.println(" Account Open  successfully!");
@@ -37,15 +41,24 @@ public class AccountService {
 
     public static void insertdepositMoney() {
         double amount;
-
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
-
         System.out.print("Enter deposit amount: ");
         amount = scanner.nextDouble();
         scanner.nextLine();
         Account account = new Account(accountNumber, amount);
+
+        if (amount > 0)
+        {
+            account.setBalance(account.getBalance() + amount);
+            System.out.println("Deposited $" + amount + " into account " + account.getAccountNumber());
+        }
+        else
+        {
+            System.out.println("Deposit amount must be positive.");
+        }
+
         try {
             if (ACCOUNT_REPOSITORY.insertdepositMoney(account)) {
                 System.out.println(" Deposit Amount  successfully!");
@@ -73,6 +86,18 @@ public class AccountService {
 
         scanner.nextLine();  // Consume newline
         Account account3 = new Account(accountNumber, amount);
+        if (amount > 0 && account3.getBalance() >= amount)
+        {
+            account3.setBalance(account3.getBalance() - amount);
+            System.out.println("Withdrew $" + amount + " from account " + account3.getAccountNumber());
+        }
+        else if (amount > 0 && account3.getBalance() < amount)
+        {
+            System.out.println("Insufficient funds for withdrawal.");
+        } else {
+            System.out.println("Withdrawal amount must be positive.");
+        }
+
         try {
             if (ACCOUNT_REPOSITORY.insertwithdrawMoney(account3)) {
                 System.out.println("  withdraw Money  successfully!");
