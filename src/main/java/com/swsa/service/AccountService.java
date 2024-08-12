@@ -1,5 +1,6 @@
 package com.swsa.service;
 import com.swsa.model.Account;
+import com.swsa.model.Customer;
 import com.swsa.repository.AccountRepository;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -19,12 +20,13 @@ public class AccountService {
         System.out.print("Enter initial deposit amount: ");
         double balance = scanner.nextDouble();
 
+        Scanner scanner1 = new Scanner(System.in);
+        System.out.println("Pls enter student Customer ID:");
+        int customerId = Integer.parseInt(scanner1.nextLine());
         scanner.nextLine();  // Consume newline
-        Account account1 = new Account(accountNumber, accountHolderName, balance);
 
-
-
-
+       Customer customer = ACCOUNT_REPOSITORY.retrieverCustomer(customerId);
+        Account account1 = new Account(accountNumber, accountHolderName, balance,customer);
 
         try {
             if (ACCOUNT_REPOSITORY.insertCustomerAccount(account1)) {
