@@ -1,15 +1,11 @@
 CREATE TABLE bankmanagementsystems.customer (
-  accountHolderName VARCHAR(55) NULL,
-  gender VARCHAR(45) NULL,
-  mobileNo INT NULL,
-  dob VARCHAR(45) NULL,
+  customerId INT NOT NULL,
+  name VARCHAR(45) NULL,
+  obileNo INT(10) NULL,
   address VARCHAR(45) NULL,
   emailId VARCHAR(45) NULL,
-  Customercol VARCHAR(45) NULL,
-  aadhaarNo INT NULL);
+  aadhaarNo INT(12) NULL,
+  PRIMARY KEY (`customerId`));
 
 
-SELECT * FROM bankmanagementsystems.customer;
 
-ALTER TABLE bankmanagementsystems.customer` 
-DROP COLUMN Customercol;
