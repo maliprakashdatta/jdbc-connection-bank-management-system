@@ -18,13 +18,13 @@ public class AccountRepository {
         }
     }
 
-    public Customer retrieverCustomer(int customerId)
+    public Customer retrieverCustomer()
     {
         return null;
     }
-    public List<Account> retrieveCard()
-    {
 
+    public List<Account> retrieveAccount()
+    {
 
         List<Account> accounts = new ArrayList<>();
         // Use the connection to execute SQL queries and interact awith the database
@@ -43,7 +43,7 @@ public class AccountRepository {
                 int customerId = ResultSet1.getInt("customerId");
 
                 // Do something with the data, e.g., print it
-                Account account = new Account(accountNumber, accountHolderName, balance);
+                Account account = new Account(accountNumber, accountHolderName, balance,customerId);
                 accounts.add(account);
             }
         } catch (SQLException e) {
@@ -65,7 +65,7 @@ public class AccountRepository {
     // Method to update user data into the database
     public boolean insertCustomerAccount(Account account) throws SQLException {
         this.initConnection();
-        int amount = 0;
+     //   int amount = 0;
         String query = "INSERT INTO account VALUES (?, ?, ?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -73,12 +73,10 @@ public class AccountRepository {
             preparedStatement.setString(2, account.getAccountHolderName());
             preparedStatement.setDouble(3, account.getBalance());
             preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
-           System.out.println("inseret  data successfully .. : " + account);
 
+           System.out.println("insert  data successfully .. : " + account);
             int rowsInserted = preparedStatement.executeUpdate();
-
             return rowsInserted > 0;
-
         }
 
         catch (SQLException e) {
@@ -88,10 +86,50 @@ public class AccountRepository {
     }
 
 
+
     //---------------DEPOSIT ACOUNT-----------------------------
 
+    public List<Account> retrieveDeposit()
+    {
+    List<Account> accounts = new ArrayList<>();
+    // Use the connection to execute SQL queries and interact awith the database
+        try {
+        this.initConnection();
 
-    // Method to update user data into the database
+        // Your database operations here...
+        Statement statement = connection.createStatement();
+        ResultSet ResultSet1 = statement.executeQuery("SELECT * FROM account");
+
+        // Iterate over the result set
+        while (ResultSet1.next()) {
+            String accountNumber = ResultSet1.getString("AccountNumber");
+            double balance = ResultSet1.getDouble("balance");
+
+
+            // Do something with the data, e.g., print it
+            Account account = new Account(accountNumber, balance);
+            accounts.add(account);
+        }
+    } catch (SQLException e) {
+        System.err.println("SQL error: " + e.getMessage());
+    } finally {
+        // Close the connection when done
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.err.println("Error closing connection: " + e.getMessage());
+            }
+        }
+    }
+        return accounts;
+}
+
+
+
+
+
+// Method to update user data into the database
     public boolean insertdepositMoney(Account account) throws SQLException {
         this.initConnection();
         int balance=0;
@@ -102,7 +140,7 @@ public class AccountRepository {
             preparedStatement.setDouble(2, account.getBalance());
             // preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
 
-           System.out.println("inseret  data successfully .. : " + account);
+           System.out.println("insert  data successfully .... : " + account);
 
             int rowsInserted = preparedStatement.executeUpdate();
 
