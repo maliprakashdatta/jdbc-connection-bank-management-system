@@ -22,7 +22,6 @@ public class CustomerRepository {
     long aadhaarNo;*/
 
     public List<Customer> retrieverCustomer(int customerId)
-
     {
         Customer customer = null;
         List<Customer> customers = new ArrayList<>();
@@ -93,7 +92,7 @@ public class CustomerRepository {
     public boolean updateNewCustomer(Customer customer) throws SQLException {
         this.initConnection();
 
-        String query = "UPDATE customer SET  AccountHolderName= ?,Gender= ?, MobileNo = ?,dob= ?,,Address= ? AccountNo= ?,EmailId= ?,AadhaarNo= ?";
+        String query = "UPDATE customer SET  customerId= ?,Name= ?, MobileNo = ?,EmailId= ?,AadhaarNo=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
             preparedStatement.setInt(1, customer.getCustomerId());
