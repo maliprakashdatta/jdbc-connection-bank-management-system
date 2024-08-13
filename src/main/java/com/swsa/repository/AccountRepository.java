@@ -65,6 +65,7 @@ public class AccountRepository {
     // Method to update user data into the database
     public boolean insertCustomerAccount(Account account) throws SQLException {
         this.initConnection();
+        int amount = 0;
         String query = "INSERT INTO account VALUES (?, ?, ?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -72,13 +73,15 @@ public class AccountRepository {
             preparedStatement.setString(2, account.getAccountHolderName());
             preparedStatement.setDouble(3, account.getBalance());
             preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
-
-            System.out.println("inseret  data successfully .. : " + account);
+           System.out.println("inseret  data successfully .. : " + account);
 
             int rowsInserted = preparedStatement.executeUpdate();
 
             return rowsInserted > 0;
-        } catch (SQLException e) {
+
+        }
+
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -91,6 +94,7 @@ public class AccountRepository {
     // Method to update user data into the database
     public boolean insertdepositMoney(Account account) throws SQLException {
         this.initConnection();
+        int balance=0;
         String query = "INSERT INTO account VALUES (?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -98,7 +102,7 @@ public class AccountRepository {
             preparedStatement.setDouble(2, account.getBalance());
             // preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
 
-            System.out.println("inseret  data successfully .. : " + account);
+           System.out.println("inseret  data successfully .. : " + account);
 
             int rowsInserted = preparedStatement.executeUpdate();
 
