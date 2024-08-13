@@ -50,8 +50,7 @@ public class AccountService {
         amount = scanner.nextDouble();
         scanner.nextLine();
         Account account = new Account(accountNumber, amount);
-
-        if (amount > 0)
+       if (amount > 0)
         {
             account.setBalance(account.getBalance() + amount);
             System.out.println("Deposited $" + amount + " into account " + account.getAccountNumber());
