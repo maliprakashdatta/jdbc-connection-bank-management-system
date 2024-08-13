@@ -127,9 +127,6 @@ public class AccountService {
         System.out.println("The balance of account " + account.getAccountNumber() + " is $" + account.getBalance());
         return account4.getBalance();
 
-
-
-
     }
 
 
