@@ -6,15 +6,18 @@ public class Account {
     String accountHolderName;
     double balance;
     Customer customer;
+
     public Account(String accountNumber, String accountHolderName, double balance) {
     }
 
     public Account(String accountNumber, double amount) {
     }
 
-
     public Account(String accountNumber) {
     }
+    public Account(String accountNumber, String accountHolderName, double balance, int customerId) {
+    }
+
 
     //Customer customer;
 
