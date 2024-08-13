@@ -9,6 +9,17 @@ public class AccountService {
 
     private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
 
+    private static final AccountRepository ACCOUNT_REPOSITORY1= new AccountRepository();
+    public Customer retrieverCustomer() {
+        return ACCOUNT_REPOSITORY1.retrieverCustomer();
+
+    }
+
+
+
+
+
+
     public static void insertCustomerAccount() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
@@ -21,11 +32,11 @@ public class AccountService {
         double balance = scanner.nextDouble();
 
         Scanner scanner1 = new Scanner(System.in);
-        System.out.println("Pls enter student Customer ID:");
+        System.out.println("Pls enter Customer ID:");
         int customerId = Integer.parseInt(scanner1.nextLine());
         scanner.nextLine();  // Consume newline
 
-       Customer customer = ACCOUNT_REPOSITORY.retrieverCustomer(customerId);
+       Customer customer = ACCOUNT_REPOSITORY.retrieverCustomer();
         Account account1 = new Account(accountNumber, accountHolderName, balance,customer);
 
         try {
@@ -40,7 +51,6 @@ public class AccountService {
 
     }
 
-
     public static void insertdepositMoney() {
         double amount;
         Scanner scanner = new Scanner(System.in);
@@ -50,6 +60,7 @@ public class AccountService {
         amount = scanner.nextDouble();
         scanner.nextLine();
         Account account = new Account(accountNumber, amount);
+
        if (amount > 0)
         {
             account.setBalance(account.getBalance() + amount);
@@ -87,6 +98,7 @@ public class AccountService {
 
         scanner.nextLine();  // Consume newline
         Account account3 = new Account(accountNumber, amount);
+
         if (amount > 0 && account3.getBalance() >= amount)
         {
             account3.setBalance(account3.getBalance() - amount);
