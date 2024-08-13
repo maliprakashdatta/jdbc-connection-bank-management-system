@@ -14,28 +14,22 @@ public class CustomerRepository {
             connection = new ConnectionService().getConnection();
         }
     }
-    /*int customerId;
-    String name;
-    long mobileNo;
-    String address;
-    String emailId;
-    long aadhaarNo;*/
 
     public List<Customer> retrieverCustomer(int customerId)
     {
-        Customer customer = null;
+      //Customer customer = null;
         List<Customer> customers = new ArrayList<>();
         // Use the connection to execute SQL queries and interact with the database
         try {
             this.initConnection();
             // Your database operations here...
             Statement statement= connection.createStatement();
-           // ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
-           ResultSet resultSet = statement.executeQuery("SELECT * FROM customer where customerId = " + customerId);
+           ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
+           //ResultSet resultSet = statement.executeQuery("SELECT * FROM customer where customerId = " + customerId);
             // Iterate over the result set
             while (resultSet.next()) {
 
-                customerId = resultSet.getInt("customerId");
+               customerId = resultSet.getInt("customerId");
                 String name = resultSet.getString("name");
                 long mobileNo=resultSet.getLong("mobileNo");
                 String address = resultSet.getString("address");
@@ -43,7 +37,7 @@ public class CustomerRepository {
                 long aadhaarNo = resultSet.getLong("aadhaarNo");
                 // Do something with the data, e.g., print it
 
-                customer = new Customer(customerId, name, mobileNo, address, emailId, aadhaarNo);
+               Customer customer = new Customer(customerId, name, mobileNo, address, emailId, aadhaarNo);
 
                 customers.add(customer);
             }
@@ -114,14 +108,14 @@ public class CustomerRepository {
     }
 
     // Method to delete user data into the database
-    public boolean deleteNewCustomer(long aadhaarNo) throws SQLException {
+    public boolean deleteNewCustomer(int customerId) throws SQLException {
         this.initConnection();
 
-        String query = "DELETE FROM customer WHERE aadhaarNo = ?";
+        String query = "DELETE FROM customer WHERE customerId = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setLong(7,aadhaarNo);
+            preparedStatement.setLong(1,customerId);
 
-            System.out.println("deleting saving account Successfully..: " + aadhaarNo);
+            System.out.println("deleting saving account Successfully..: " + customerId);
 
             int rowsInserted = preparedStatement.executeUpdate();
 
