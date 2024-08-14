@@ -56,7 +56,7 @@ public class CustomerRepository {
         return customers;
     }
 
-/*
+
     // Method to update user data into the database
     public boolean insertNewCustomer(Customer customer) throws SQLException {
         this.initConnection();
@@ -79,7 +79,7 @@ public class CustomerRepository {
             e.printStackTrace();
         }
         return false;
-    }*/
+    }
 
 
     public Customer retrieveCustomer(int customerId)
