@@ -15,7 +15,7 @@ public class CustomerRepository {
         }
     }
 
-    public List<Customer> retrieverCustomer(int customerId)
+    public List<Customer> retrieverCustomer()
     {
       //Customer customer = null;
         List<Customer> customers = new ArrayList<>();
@@ -24,12 +24,12 @@ public class CustomerRepository {
             this.initConnection();
             // Your database operations here...
             Statement statement= connection.createStatement();
-           //ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
-           ResultSet resultSet = statement.executeQuery("SELECT * FROM customer where customerId = " + customerId);
+           ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
+          // ResultSet resultSet = statement.executeQuery("SELECT * FROM customer where customerId = " + customerId);
             // Iterate over the result set
             while (resultSet.next()) {
 
-               customerId = resultSet.getInt("customerId");
+               int customerId = resultSet.getInt("customerId");
                 String name = resultSet.getString("name");
                 long mobileNo=resultSet.getLong("mobileNo");
                 String address = resultSet.getString("address");
@@ -60,7 +60,7 @@ public class CustomerRepository {
     // Method to update user data into the database
     public boolean insertNewCustomer(Customer customer) throws SQLException {
         this.initConnection();
-        String query = "INSERT INTO customer VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO customer VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection. prepareStatement(query)) {
 
             preparedStatement.setInt(1, customer.getCustomerId());
@@ -86,7 +86,7 @@ public class CustomerRepository {
     public boolean updateNewCustomer(Customer customer) throws SQLException {
         this.initConnection();
 
-        String query = "UPDATE customer SET  customerId= ?,Name= ?, MobileNo = ?,EmailId= ?,AadhaarNo=?";
+        String query = "UPDATE customer SET  customerId= ?,Name= ?, MobileNo = ?,Address=?,EmailId= ?,AadhaarNo=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query))
         {
             preparedStatement.setInt(1, customer.getCustomerId());
