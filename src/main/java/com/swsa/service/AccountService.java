@@ -16,10 +16,6 @@ public class AccountService {
     }
 
 
-
-
-
-
     public static void insertCustomerAccount() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
