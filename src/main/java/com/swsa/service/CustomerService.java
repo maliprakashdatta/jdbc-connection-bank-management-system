@@ -13,15 +13,10 @@ public class CustomerService {
         return CUSTOMER_REPOSITORY.retrieveCustomer();
 
     }
-    /*
+
+
         public static void insertNewCustomer()
         {
-            *//*int customerId;
-            String name;
-            long mobileNo;
-            String address;
-            String emailId;
-            long aadhaarNo;*//*
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Pls enter Customer ID:");
@@ -60,7 +55,7 @@ public class CustomerService {
             }
 
         }
-*/
+
     }
 
 
