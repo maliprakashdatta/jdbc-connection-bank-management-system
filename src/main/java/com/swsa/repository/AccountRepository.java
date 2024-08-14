@@ -1,7 +1,5 @@
 package com.swsa.repository;
 import com.swsa.model.Account;
-//import com.swsa.model.Customer;
-import com.swsa.model.Card;
 import com.swsa.model.Customer;
 import com.swsa.service.ConnectionService;
 import java.sql.*;
@@ -64,15 +62,15 @@ public class AccountRepository {
     public boolean insertAccount(Account account) throws SQLException {
         this.initConnection();
         //   int amount = 0;
-        String query = "INSERT INTO account VALUES (?, ?, ?,?)";
+        String query = "INSERT INTO account VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setString(1, account.getAccountNumber());
             preparedStatement.setString(2, account.getAccountHolderName());
             preparedStatement.setDouble(3, account.getBalance());
             preparedStatement.setInt(4, account.getCustomer().getCustomerId());
-
             System.out.println("insert  Account  data successfully .. : " + account);
+
             int rowsInserted = preparedStatement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
@@ -121,7 +119,7 @@ public class AccountRepository {
     public boolean updateAccount(Account account) throws SQLException {
         this.initConnection();
 
-        String query = "UPDATE account SET   AccountNumber= ?, AccountHolderName= ?, Balance= ?,CustomerId=?";
+        String query = "UPDATE account SET   AccountNumber= ?, AccountHolderName= ?, Balance= ?, CustomerId=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, account.getAccountNumber());
             preparedStatement.setString(2, account.getAccountHolderName());
@@ -143,9 +141,6 @@ public class AccountRepository {
         return null;
     }
 }
-
-
-
 
 
 
