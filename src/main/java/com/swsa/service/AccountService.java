@@ -3,15 +3,19 @@ import com.swsa.model.Account;
 import com.swsa.model.Customer;
 import com.swsa.repository.AccountRepository;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class AccountService {
 
     private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
 
-    // private static final AccountRepository ACCOUNT_REPOSITORY1= new AccountRepository();
 
-    public static void insertCustomerAccount() throws SQLException {
+
+    public List<Account> retrieveAccount() {
+        return (List<Account>) ACCOUNT_REPOSITORY.retrieveAccount();
+    }
+        public static void insertAccount() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
@@ -31,7 +35,7 @@ public class AccountService {
         Account account1 = new Account(accountNumber, accountHolderName, balance, customer);
 
         try {
-            if (ACCOUNT_REPOSITORY.insertCustomerAccount(account1)) {
+            if (ACCOUNT_REPOSITORY.insertAccount(account1)) {
                 System.out.println(" Account Open  successfully!");
             } else {
                 System.out.println(" Account not Open .");
@@ -41,7 +45,6 @@ public class AccountService {
         }
 
     }
-
 /*
     public static void depositMoney() {
         double amount;
@@ -72,7 +75,6 @@ public class AccountService {
 
     }
 }
-
 
     public void withdrawMoney() {
     }
