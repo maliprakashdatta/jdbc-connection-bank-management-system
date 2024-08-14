@@ -15,7 +15,8 @@ public class CustomerRepository {
         }
     }
 
-    public List<Customer> retrieverCustomer()
+    public List<Customer> retrieveCustomer()
+
     {
       //Customer customer = null;
         List<Customer> customers = new ArrayList<>();
@@ -25,7 +26,6 @@ public class CustomerRepository {
             // Your database operations here...
             Statement statement= connection.createStatement();
            ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
-          // ResultSet resultSet = statement.executeQuery("SELECT * FROM customer where customerId = " + customerId);
             // Iterate over the result set
             while (resultSet.next()) {
 
@@ -56,7 +56,7 @@ public class CustomerRepository {
         return customers;
     }
 
-
+/*
     // Method to update user data into the database
     public boolean insertNewCustomer(Customer customer) throws SQLException {
         this.initConnection();
@@ -79,7 +79,51 @@ public class CustomerRepository {
             e.printStackTrace();
         }
         return false;
+    }*/
+
+
+    public Customer retrieveCustomer(int customerId)
+    {
+        Customer   customer = null;
+        // Use the connection to execute SQL queries and interact with the database
+        try {
+            this.initConnection();
+            // Your database operations here...
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM address where address_id = " + customer);
+            // Iterate over the result set
+            while (resultSet.next()) {
+                int Id = resultSet.getInt("customerId");
+                String name = resultSet.getString("name");
+                long mobileNo=resultSet.getLong("mobileNo");
+                String address = resultSet.getString("address");
+                String emailId = resultSet.getString("emailId");
+                long aadhaarNo = resultSet.getLong("aadhaarNo");
+                // Do something with the data, e.g., print it
+
+                 customer = new Customer(Id, name, mobileNo, address, emailId, aadhaarNo);
+
+               // customers.add(customer);
+
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL error: " + e.getMessage());
+        } finally {
+            // Close the connection when done
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Error closing connection: " + e.getMessage());
+                }
+            }
+        }
+        return  customer;
     }
+
+
+
+
 
 
     // Method to update user data into the database
