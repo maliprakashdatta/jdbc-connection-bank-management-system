@@ -1,6 +1,7 @@
 package com.swsa.repository;
 import com.swsa.model.Account;
 //import com.swsa.model.Customer;
+import com.swsa.model.Card;
 import com.swsa.model.Customer;
 import com.swsa.service.ConnectionService;
 import java.sql.*;
@@ -22,10 +23,42 @@ public class AccountRepository {
     }
 
     public List<Account> retrieverAccount()
-    {
 
-        return null;
+    {
+        List<Account> accounts = new ArrayList<>();
+        // Use the connection to execute SQL queries and interact with the database
+        try {
+            this.initConnection();
+            // Your database operations here...
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM account");
+            // Iterate over the result set
+            while (resultSet.next()) {
+
+                String accountNumber = resultSet.getString("AccountNumber");
+                String accountHolderName = resultSet.getString("AccountHolderName");
+                double balance = resultSet.getLong("balance");
+                int customerId = resultSet.getInt("customerId");
+
+                // Do something with the data, e.g., print it
+                Account account = new Account(accountNumber, accountHolderName, balance, customerId);
+                accounts.add(account);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL error: " + e.getMessage());
+        } finally {
+            // Close the connection when done
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Error closing connection: " + e.getMessage());
+                }
+            }
+        }
+        return accounts;
     }
+
 
     // Method to update user data into the database
     public boolean insertAccount(Account account) throws SQLException {
@@ -39,7 +72,7 @@ public class AccountRepository {
             preparedStatement.setDouble(3, account.getBalance());
             preparedStatement.setInt(4, account.getCustomer().getCustomerId());
 
-            System.out.println("insert  data successfully .. : " + account);
+            System.out.println("insert  Account  data successfully .. : " + account);
             int rowsInserted = preparedStatement.executeUpdate();
             return rowsInserted > 0;
         } catch (SQLException e) {
