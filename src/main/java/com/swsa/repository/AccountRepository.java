@@ -6,8 +6,6 @@ import com.swsa.service.ConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
 public class AccountRepository {
 
 
@@ -23,50 +21,14 @@ public class AccountRepository {
         return null;
     }
 
-    /*public Customer retrieverCustomer(int customerId) {
+    public List<Account> retrieverAccount()
+    {
+
         return null;
-    }*/
-
-    public Customer retrieveAccount() {
-
-        List<Account> accounts = new ArrayList<>();
-        // Use the connection to execute SQL queries and interact awith the database
-        try {
-            this.initConnection();
-
-            // Your database operations here...
-            Statement statement = connection.createStatement();
-            ResultSet ResultSet1 = statement.executeQuery("SELECT * FROM account");
-
-            // Iterate over the result set
-            while (ResultSet1.next()) {
-                String accountNumber = ResultSet1.getString("AccountNumber");
-                String accountHolderName = ResultSet1.getString("AccountHolderName");
-                double balance = ResultSet1.getLong("balance");
-                int customerId = ResultSet1.getInt("customerId");
-
-                // Do something with the data, e.g., print it
-                Account account = new Account(accountNumber, accountHolderName, balance, customerId);
-                accounts.add(account);
-            }
-        } catch (SQLException e) {
-            System.err.println("SQL error: " + e.getMessage());
-        } finally {
-            // Close the connection when done
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    System.err.println("Error closing connection: " + e.getMessage());
-                }
-            }
-        }
-        return (Customer) accounts;
     }
 
-
     // Method to update user data into the database
-    public boolean insertCustomerAccount(Account account) throws SQLException {
+    public boolean insertAccount(Account account) throws SQLException {
         this.initConnection();
         //   int amount = 0;
         String query = "INSERT INTO account VALUES (?, ?, ?,?)";
@@ -86,11 +48,47 @@ public class AccountRepository {
         return false;
     }
 
+    public Account retrieveAccount()
+    {
+       Account   account = null;
+        // Use the connection to execute SQL queries and interact with the database
+        try {
+            this.initConnection();
+            // Your database operations here...
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM account where accountNumber = " + account);
+            // Iterate over the result set
+            while (resultSet.next()) {
+
+                String accountNumber = resultSet.getString("AccountNumber");
+                String accountHolderName = resultSet.getString("AccountHolderName");
+                double balance = resultSet.getLong("balance");
+                int customerId = resultSet.getInt("customerId");
+
+                // Do something with the data, e.g., print it
+                 account = new Account(accountNumber, accountHolderName, balance, customerId);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL error: " + e.getMessage());
+        } finally {
+            // Close the connection when done
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Error closing connection: " + e.getMessage());
+                }
+            }
+        }
+        return  account;
+    }
+
+
     // Method to update user data into the database
-    public boolean updateCustomerAccount(Account account) throws SQLException {
+    public boolean updateAccount(Account account) throws SQLException {
         this.initConnection();
 
-        String query = "UPDATE account SET   AccountNumber= ?, AccountHolderName= ?, Balance= ?,Amount()";
+        String query = "UPDATE account SET   AccountNumber= ?, AccountHolderName= ?, Balance= ?,CustomerId=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, account.getAccountNumber());
             preparedStatement.setString(2, account.getAccountHolderName());
@@ -108,7 +106,7 @@ public class AccountRepository {
         return false;
     }
 
-    public Object insertCustomerAccount(int customerId) {
+    public Object insertAccount(int customerId) {
         return null;
     }
 }
