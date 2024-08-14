@@ -28,8 +28,9 @@ public class App {
             System.out.println("2. Open New Customer Account");
             System.out.println("3. Deposit Account ");
             System.out.println("4. Withdraw Amount");
-            System.out.println("5. Applying Customer");
-            System.out.println("6. check Balance");
+            System.out.println("5. Performing RETRIEVE operation on Customer.");
+            System.out.println("6. Applying Customer");
+            System.out.println("7. check Balance");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
@@ -43,11 +44,11 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Applying for new Customer");
-                   accountService.insertCustomerAccount();
+                     accountService.insertCustomerAccount();
                     break;
                 case 3:
                     System.out.println("Deposit Account/Debit ");
-                    //accountService.insertdepositMoney();
+                    //accountService.depositMoney();
                     break;
                 case 4:
                     System.out.println("Withdraw Account/Credit ");
@@ -55,10 +56,18 @@ public class App {
                     break;
 
                 case 5:
-                    System.out.println("Applying Customer ");
-                    customerService.insertNewCustomer();
+
+                    System.out.println("Performing RETRIEVE operation on Customer..");
+                    customerService.retrieveCustomer().forEach(customer -> {
+                        System.out.println("customerId ID: " + customer.getCustomerId() + ", Name: " + customer.getName() + ", MobileNo: " + customer.getMobileNo()+ ", Address: " + customer.getAddress()+ ", emailId: " + customer.getEmailId()+ ", aadhaarNo: " + customer.getAadhaarNo());
+                    });
                     break;
                 case 6:
+                   System.out.println("Applying Customer ");
+                  // customerService.insertNewCustomer();
+                    break;
+
+                case 7:
                     System.out.println("Check Balance ");
                     //accountService.checkBalance();
                     //double balance = accountService.checkBalance();
