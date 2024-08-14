@@ -2,20 +2,26 @@ package com.swsa.service;
 import com.swsa.model.Customer;
 import com.swsa.repository.CustomerRepository;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 public class CustomerService {
 
 
     private static final CustomerRepository CUSTOMER_REPOSITORY = new CustomerRepository();
 
+    public List<Customer> retrieveCustomer() {
+        return CUSTOMER_REPOSITORY.retrieveCustomer();
+
+    }
+    /*
         public static void insertNewCustomer()
         {
-            /*int customerId;
+            *//*int customerId;
             String name;
             long mobileNo;
             String address;
             String emailId;
-            long aadhaarNo;*/
+            long aadhaarNo;*//*
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Pls enter Customer ID:");
@@ -54,7 +60,7 @@ public class CustomerService {
             }
 
         }
-
+*/
     }
 
 
