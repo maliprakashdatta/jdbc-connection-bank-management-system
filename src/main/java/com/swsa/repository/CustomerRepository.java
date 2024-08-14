@@ -24,8 +24,8 @@ public class CustomerRepository {
             this.initConnection();
             // Your database operations here...
             Statement statement= connection.createStatement();
-           ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
-           //ResultSet resultSet = statement.executeQuery("SELECT * FROM customer where customerId = " + customerId);
+           //ResultSet resultSet = statement.executeQuery("SELECT * FROM customer");
+           ResultSet resultSet = statement.executeQuery("SELECT * FROM customer where customerId = " + customerId);
             // Iterate over the result set
             while (resultSet.next()) {
 
