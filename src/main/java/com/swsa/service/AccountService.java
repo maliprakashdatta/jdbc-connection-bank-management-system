@@ -15,6 +15,7 @@ public class AccountService {
     public List<Account> retrieveAccount() {
         return (List<Account>) ACCOUNT_REPOSITORY.retrieveAccount();
     }
+
         public static void insertAccount() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
@@ -31,7 +32,7 @@ public class AccountService {
         int customerId = Integer.parseInt(scanner1.nextLine());
         scanner.nextLine();  // Consume newline
 
-        Customer customer = (Customer) ACCOUNT_REPOSITORY.retrieverCustomer(customerId);
+        Customer customer = ACCOUNT_REPOSITORY.retrieverCustomer(customerId);
         Account account1 = new Account(accountNumber, accountHolderName, balance, customer);
 
         try {
