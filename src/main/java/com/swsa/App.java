@@ -5,13 +5,14 @@ import com.swsa.service.ConnectionService;
 import com.swsa.service.CustomerService;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class App {
 
     private static final ConnectionService connectionService = new ConnectionService();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException {
 
         CardService cardService=new CardService();
         CustomerService customerService=new CustomerService();
@@ -42,15 +43,15 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Applying for new Customer");
-                    accountService.insertCustomerAccount();
+                   accountService.insertCustomerAccount();
                     break;
                 case 3:
                     System.out.println("Deposit Account/Debit ");
-                    accountService.insertdepositMoney();
+                    //accountService.insertdepositMoney();
                     break;
                 case 4:
                     System.out.println("Withdraw Account/Credit ");
-                     accountService.insertwithdrawMoney();
+                     //accountService.insertwithdrawMoney();
                     break;
 
                 case 5:
@@ -59,9 +60,9 @@ public class App {
                     break;
                 case 6:
                     System.out.println("Check Balance ");
-                    accountService.checkBalance();
-                    double balance = accountService.checkBalance();
-                    System.out.println("Checked balance: $" + balance);
+                    //accountService.checkBalance();
+                    //double balance = accountService.checkBalance();
+                    //System.out.println("Checked balance: $" + balance);
                     break;
 
                 case 0:
