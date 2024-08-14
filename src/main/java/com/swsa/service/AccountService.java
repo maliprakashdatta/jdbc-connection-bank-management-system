@@ -9,14 +9,15 @@ public class AccountService {
 
     private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
 
-    private static final AccountRepository ACCOUNT_REPOSITORY1= new AccountRepository();
+   // private static final AccountRepository ACCOUNT_REPOSITORY1= new AccountRepository();
+
     public Customer retrieverCustomer() {
-        return ACCOUNT_REPOSITORY1.retrieverCustomer();
+        return ACCOUNT_REPOSITORY.retrieveAccount();
 
     }
 
 
-    public static void insertCustomerAccount() {
+    public static void insertCustomerAccount() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
@@ -32,7 +33,7 @@ public class AccountService {
         int customerId = Integer.parseInt(scanner1.nextLine());
         scanner.nextLine();  // Consume newline
 
-       Customer customer = ACCOUNT_REPOSITORY.retrieverCustomer();
+      Customer customer = (Customer) ACCOUNT_REPOSITORY.insertCustomerAccount(customerId);
         Account account1 = new Account(accountNumber, accountHolderName, balance,customer);
 
         try {
@@ -46,6 +47,7 @@ public class AccountService {
         }
 
     }
+/*
 
     public static void insertdepositMoney() {
         double amount;
@@ -136,6 +138,7 @@ public class AccountService {
         return account4.getBalance();
 
     }
+*/
 
 
 }
