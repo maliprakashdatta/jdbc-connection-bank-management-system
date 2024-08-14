@@ -19,11 +19,11 @@ public class AccountRepository {
         }
     }
 
-   /* public Customer retrieverCustomer() {
+    public Customer retrieverCustomer(int customerId) {
         return null;
     }
 
-    public Customer retrieverCustomer(int customerId) {
+    /*public Customer retrieverCustomer(int customerId) {
         return null;
     }*/
 
@@ -119,8 +119,8 @@ public class AccountRepository {
 
 
 
-
 /*
+
 
 
 
@@ -167,7 +167,7 @@ public class AccountRepository {
 
 
 // Method to update user data into the database
-    public boolean insertdepositMoney(Account account) throws SQLException {
+    public boolean depositMoney(Account account) throws SQLException {
         this.initConnection();
         int balance=0;
         String query = "INSERT INTO account VALUES (?, ?)";
@@ -188,7 +188,7 @@ public class AccountRepository {
         return false;
     }
 
-
+/*
 //---------------Withdraw Amount -----------------------------
 
     // Method to update user data into the database
