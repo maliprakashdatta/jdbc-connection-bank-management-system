@@ -9,13 +9,7 @@ public class AccountService {
 
     private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
 
-   // private static final AccountRepository ACCOUNT_REPOSITORY1= new AccountRepository();
-
-    public Customer retrieverCustomer() {
-        return ACCOUNT_REPOSITORY.retrieveAccount();
-
-    }
-
+    // private static final AccountRepository ACCOUNT_REPOSITORY1= new AccountRepository();
 
     public static void insertCustomerAccount() throws SQLException {
         Scanner scanner = new Scanner(System.in);
@@ -33,8 +27,8 @@ public class AccountService {
         int customerId = Integer.parseInt(scanner1.nextLine());
         scanner.nextLine();  // Consume newline
 
-      Customer customer = (Customer) ACCOUNT_REPOSITORY.insertCustomerAccount(customerId);
-        Account account1 = new Account(accountNumber, accountHolderName, balance,customer);
+        Customer customer = (Customer) ACCOUNT_REPOSITORY.retrieverCustomer(customerId);
+        Account account1 = new Account(accountNumber, accountHolderName, balance, customer);
 
         try {
             if (ACCOUNT_REPOSITORY.insertCustomerAccount(account1)) {
@@ -47,9 +41,9 @@ public class AccountService {
         }
 
     }
-/*
 
-    public static void insertdepositMoney() {
+/*
+    public static void depositMoney() {
         double amount;
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
@@ -59,18 +53,15 @@ public class AccountService {
         scanner.nextLine();
         Account account = new Account(accountNumber, amount);
 
-       if (amount > 0)
-        {
+        if (amount > 0) {
             account.setBalance(account.getBalance() + amount);
             System.out.println("Deposited $" + amount + " into account " + account.getAccountNumber());
-        }
-        else
-        {
+        } else {
             System.out.println("Deposit amount must be positive.");
         }
 
         try {
-            if (ACCOUNT_REPOSITORY.insertdepositMoney(account)) {
+            if (ACCOUNT_REPOSITORY.depositMoney(account)) {
                 System.out.println(" Deposit Amount  successfully!");
             } else {
                 System.out.println(" Account not Open .");
@@ -80,6 +71,8 @@ public class AccountService {
         }
 
     }
+}
+
 
     public void withdrawMoney() {
     }
@@ -138,6 +131,7 @@ public class AccountService {
         return account4.getBalance();
 
     }
+
 */
 
 
