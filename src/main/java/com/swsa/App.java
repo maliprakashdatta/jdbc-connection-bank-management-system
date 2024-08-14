@@ -30,7 +30,8 @@ public class App {
             System.out.println("4. Withdraw Amount");
             System.out.println("5. Performing RETRIEVE operation on Customer.");
             System.out.println("6. Applying Customer");
-            System.out.println("7. check Balance");
+            System.out.println("7. Performing RETRIEVE operation on Acount .");
+            System.out.println("8. check Balance");
             System.out.println("0. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
@@ -44,7 +45,7 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Applying for new Customer");
-                     accountService.insertCustomerAccount();
+                     accountService.insertAccount();
                     break;
                 case 3:
                     System.out.println("Deposit Account/Debit ");
@@ -56,7 +57,6 @@ public class App {
                     break;
 
                 case 5:
-
                     System.out.println("Performing RETRIEVE operation on Customer..");
                     customerService.retrieveCustomer().forEach(customer -> {
                         System.out.println("customerId ID: " + customer.getCustomerId() + ", Name: " + customer.getName() + ", MobileNo: " + customer.getMobileNo()+ ", Address: " + customer.getAddress()+ ", emailId: " + customer.getEmailId()+ ", aadhaarNo: " + customer.getAadhaarNo());
@@ -64,10 +64,16 @@ public class App {
                     break;
                 case 6:
                    System.out.println("Applying Customer ");
-                  // customerService.insertNewCustomer();
+                   customerService.insertNewCustomer();
                     break;
 
                 case 7:
+                    System.out.println("Performing RETRIEVE operation on Account..");
+                    accountService.retrieveAccount().forEach(Account -> {
+                        System.out.println("Account Number: " + Account.getAccountNumber()+ ", AccountHolderName: " +Account.getAccountHolderName() + ", Balance: " + Account.getBalance()+ ", customer: " + Account.getCustomer());
+                    });
+
+                case 8:
                     System.out.println("Check Balance ");
                     //accountService.checkBalance();
                     //double balance = accountService.checkBalance();
