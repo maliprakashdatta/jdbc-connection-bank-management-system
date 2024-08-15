@@ -90,7 +90,7 @@ public class AccountService {
     }
 
 
-
+//===================Withdraw Amount =================================
     public void withdrawMoney() {
     }
 
@@ -101,20 +101,19 @@ public class AccountService {
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
 
-        System.out.print("Enter withdrawal amount: ");
+        System.out.print("Enter account holder name: ");
+        String accountHolderName = scanner.nextLine();
+
+        System.out.print("Enter Withdraw amount: ");
         amount = scanner.nextDouble();
 
+        Scanner scanner1 = new Scanner(System.in);
+        System.out.println("Pls enter Customer ID:");
+        int customerId = Integer.parseInt(scanner1.nextLine());
         scanner.nextLine();  // Consume newline
-        Account account3 = new Account(accountNumber, amount);
 
-        if (amount > 0 && account3.getBalance() >= amount) {
-            account3.setBalance(account3.getBalance() - amount);
-            System.out.println("Withdrew $" + amount + " from account " + account3.getAccountNumber());
-        } else if (amount > 0 && account3.getBalance() < amount) {
-            System.out.println("Insufficient funds for withdrawal.");
-        } else {
-            System.out.println("Withdrawal amount must be positive.");
-        }
+        Customer customer = CUSTOMER_REPOSITORY.retrieveCustomer(customerId);
+        Account account3 = new Account(accountNumber, accountHolderName, amount, customer);
 
         try {
             if (ACCOUNT_REPOSITORY.insertwithdrawMoney(account3)) {
