@@ -4,6 +4,9 @@ import com.swsa.model.Customer;
 import com.swsa.repository.AccountRepository;
 import com.swsa.repository.CustomerRepository;
 
+import javax.net.ssl.SSLContext;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -89,8 +92,9 @@ public class AccountService {
 
     }
 
-
+  //==========================================
 //===================Withdraw Amount =================================
+    //========================================
     public void withdrawMoney() {
     }
 
@@ -126,10 +130,39 @@ public class AccountService {
         }
     }
 
-/*
+
         public double checkBalance () {
             return 0;
         }
+
+
+    public void getBalance() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter account number: ");
+        String accountNumber = scanner.nextLine();
+
+        Scanner scanner1 = new Scanner(System.in);
+        System.out.println("Pls enter Customer ID:");
+        int customerId = Integer.parseInt(scanner1.nextLine());
+        scanner.nextLine();
+        Customer customer = CUSTOMER_REPOSITORY.retrieveCustomer(customerId);
+        Account account3 = new Account(accountNumber, customer);
+
+        try {
+            if (ACCOUNT_REPOSITORY.getBalance(account3)) {
+                System.out.println("  Balance Is:"+account3);
+            } else {
+                System.out.println("Not Checked   .");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+}
+/*
 
         public static double checkBalance (Account account)
         {
@@ -145,10 +178,11 @@ public class AccountService {
             return account4.getBalance();
 
         }
-
-    }
 */
-}
+
+
+
+
 
 
 
