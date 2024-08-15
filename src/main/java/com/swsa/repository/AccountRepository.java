@@ -18,6 +18,10 @@ public class AccountRepository {
         return null;
     }
 
+    public Account retrieverAccount(String accountNumber ) {
+        return null;
+    }
+
     public List<Account> retrieverAccount() {
         List<Account> accounts = new ArrayList<>();
         // Use the connection to execute SQL queries and interact with the database
@@ -54,7 +58,6 @@ public class AccountRepository {
     }
 
 
-
     // Method to update user data into the database
     public boolean insertAccount(Account account) throws SQLException {
         this.initConnection();
@@ -66,7 +69,7 @@ public class AccountRepository {
             preparedStatement.setString(2, account.getAccountHolderName());
             preparedStatement.setDouble(3, account.getBalance());
             preparedStatement.setInt(4, account.getCustomer().getCustomerId());
-            System.out.println("insert  Account  data successfully .. : " + account);
+            System.out.println("  Account created  data successfully .. : " + account);
 
             int rowsInserted = preparedStatement.executeUpdate();
             return rowsInserted > 0;
@@ -110,7 +113,7 @@ public class AccountRepository {
         return account;
     }
 
-/*
+
     // Method to update user data into the database
     public boolean updateAccount(Account account) throws SQLException {
         this.initConnection();
@@ -131,8 +134,11 @@ public class AccountRepository {
             e.printStackTrace();
         }
         return false;
-    }*/
-/*
+
+
+
+
+}
 
     public Object insertAccount(int customerId) {
         return null;
@@ -141,9 +147,14 @@ public class AccountRepository {
 //============================================================================
     //---------------DEPOSIT ACOUNT-----------------------------
 //=============================================================================
-public void Account(String accountNumber, double amount) {
-}
-    public List<Account> retrieveDeposit()
+
+
+
+
+
+/*
+
+    public List<Account> retrievedeposit()
 
     {
         List<Account> accounts = new ArrayList<>();
@@ -154,12 +165,15 @@ public void Account(String accountNumber, double amount) {
 
             // Your database operations here...
             Statement statement = connection.createStatement();
-            ResultSet ResultSet1 = statement.executeQuery("SELECT * FROM deposit");
+            ResultSet resultSet1 = statement.executeQuery("SELECT * FROM account");
 
             // Iterate over the result set
-            while (ResultSet1.next()) {
-                String accountNumber = ResultSet1.getString("AccountNumber");
-                double balance = ResultSet1.getDouble("balance");
+            while (ResultSet.next())
+            {
+                String accountNumber = resultSet1.getString("AccountNumber");
+                String accountHolderName = resultSet1.getString("AccountHolderName");
+                double balance = resultSet1.getLong("balance");
+                int customerId = resultSet1.getInt("customerId");
 
                 // Do something with the data, e.g., print it
                 Account account = new Account(accountNumber, balance);
@@ -179,47 +193,85 @@ public void Account(String accountNumber, double amount) {
         }
         return accounts;
     }
+*/
 
 
     // Method to update user data into the database
-    public boolean insertdepositMoney(Account account1) throws SQLException {
+    public boolean insertdepositMoney(Account account) throws SQLException {
         this.initConnection();
-        int balance = 0;
-        String query = "INSERT INTO deposit VALUES (?, ?)";
+        int amount = 0;
+        String query = "INSERT INTO account VALUES (?, ?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setString(1, account1.getAccountNumber());
-            preparedStatement.setDouble(2, account1.getBalance());
-            // preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
+            preparedStatement.setString(1, account.getAccountNumber());
+            preparedStatement.setString(2, account.getAccountHolderName());
+            preparedStatement.setDouble(3, account.getBalance());
+            preparedStatement.setInt(4, account.getCustomer().getCustomerId());
 
-            System.out.println("insert  data successfully .... : " + account1);
+            System.out.println("Deposit Money successfully .... : " + account);
 
             int rowsInserted = preparedStatement.executeUpdate();
-
+            if (amount > 0) {
+                account.setBalance(account.getBalance() + amount);
+                System.out.println("Deposited $" + amount + " into account " + account.getAccountNumber());
+            } else {
+                System.out.println("Deposit amount must be positive.");
+            }
             return rowsInserted > 0;
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    public Account retrieverDeposit() {
+
+    // Method to update user data into the database
+        public boolean updatedepositMoney(Account account) throws SQLException {
+            this.initConnection();
+
+            String query = "UPDATE account  SET   AccountNumber= ?,AccountHolderName(),Balance = Balance +  ?,CustomerId=?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query))
+            {
+                preparedStatement.setString(1, account.getAccountNumber());
+                preparedStatement.setString(2, account.getAccountHolderName());
+                preparedStatement.setDouble(3, account.getBalance());
+                preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
+
+                System.out.println("updating  Deposit Money Account data to table: " + account);
+
+                int rowsInserted = preparedStatement.executeUpdate();
+
+               return rowsInserted > 0;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+
+
+
+
+    public Account retrieverDeposit( String accountNumber) {
         Account account = null;
         // Use the connection to execute SQL queries and interact with the database
         try {
             this.initConnection();
             // Your database operations here...
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM deposit where accountNumber = " + account);
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM account where accountNumber = " +  accountNumber);
             // Iterate over the result set
             while (resultSet.next()) {
 
-                String accountNumber = resultSet.getString("AccountNumber");
+                accountNumber = resultSet.getString("AccountNumber");
+                String accountHolderName = resultSet.getString("AccountHolderName");
                 double balance = resultSet.getLong("balance");
-
+                int customerId = resultSet.getInt("customerId");
 
                 // Do something with the data, e.g., print it
-                account = new Account(accountNumber, balance);
+                account = new Account(accountNumber, balance,accountHolderName,customerId);
             }
         } catch (SQLException e) {
             System.err.println("SQL error: " + e.getMessage());
@@ -237,7 +289,12 @@ public void Account(String accountNumber, double amount) {
     }
 
 
-//---------------Withdraw Amount -----------------------------
+    //================================================================
+    //---------------Withdraw Amount -----------------------------
+  //====================================================================
+
+
+
 
     // Method to update user data into the database
     public boolean insertwithdrawMoney(Account account) throws SQLException {
@@ -249,7 +306,7 @@ public void Account(String accountNumber, double amount) {
             preparedStatement.setDouble(2, account.getBalance());
             // preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
 
-            System.out.println("inseret  data successfully .. : " + account);
+            System.out.println("Withdraw Amount successfully .. : " + account);
 
             int rowsInserted = preparedStatement.executeUpdate();
 
@@ -261,6 +318,7 @@ public void Account(String accountNumber, double amount) {
     }
 
 
+/*
 //----------------CHECK BALANCE-------------
 
     // Method to update user data into the database
@@ -291,9 +349,9 @@ public void Account(String accountNumber, double amount) {
 
 
 
-//
-//
-//        // Method to update user data into the database
+
+
+       // Method to update user data into the database
 //        public boolean updateAccount(Account account) throws SQLException {
 //            this.initConnection();
 //
