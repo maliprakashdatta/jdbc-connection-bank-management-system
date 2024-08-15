@@ -231,7 +231,7 @@ public class AccountRepository {
         public boolean updatedepositMoney(Account account) throws SQLException {
             this.initConnection();
 
-            String query = "UPDATE account  SET   AccountNumber= ?,AccountHolderName(),Balance = Balance +  ?,CustomerId=?";
+            String query = "UPDATE account  SET   AccountNumber= ?,AccountHolderName(),Balance = Amount +  ?,CustomerId=?";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query))
             {
                 preparedStatement.setString(1, account.getAccountNumber());
