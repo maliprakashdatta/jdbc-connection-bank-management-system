@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class AccountService {
 
     private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
-
     private static final CustomerRepository CUSTOMER_REPOSITORY = new CustomerRepository();
 
     public List<Account> retrieveAccount() {
