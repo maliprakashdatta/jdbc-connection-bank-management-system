@@ -17,7 +17,8 @@ public class Account {
     }
     public Account(String accountNumber, String accountHolderName, double balance, int customerId) {
     }
-
+    public void depositMoney(String accountNumber, double amount) {
+    }
 
     //Customer customer;
 
