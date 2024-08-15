@@ -5,7 +5,8 @@ import com.swsa.service.ConnectionService;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-public class AccountRepository {
+public class AccountRepository
+{
     private Connection connection = null;
 
     private void initConnection() throws SQLException {
@@ -78,7 +79,6 @@ public class AccountRepository {
         }
         return false;
     }
-
 
 
     // Method to update user data into the database
@@ -182,6 +182,7 @@ public class AccountRepository {
 
 
     // Method to update user data into the database
+
     public boolean insertwithdrawMoney(Account account) throws SQLException {
         this.initConnection();
         int amount = 0;
@@ -242,18 +243,51 @@ public class AccountRepository {
 //----------------CHECK BALANCE-------------
 //===========================================================
 
+    {
+        List<Account> accounts = new ArrayList<>();
+        // Use the connection to execute SQL queries and interact with the database
+        try {
+            this.initConnection();
+            // Your database operations here...
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("\"SELECT balance FROM account WHERE accountNumber = ? AND CustomerId=?\"");
+            // Iterate over the result set
+            while (resultSet.next()) {
+
+                String accountNumber = resultSet.getString("AccountNumber");
+                int customerId = resultSet.getInt("customerId");
+
+                // Do something with the data, e.g., print it
+                Account account = new Account(accountNumber,customerId);
+                accounts.add(account);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL error: " + e.getMessage());
+        } finally {
+            // Close the connection when done
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Error closing connection: " + e.getMessage());
+                }
+            }
+        }
+
+    }
+
 
     // Method to update user data into the database
     public boolean getBalance(Account account) throws SQLException {
         this.initConnection();
-        //String query = "INSERT INTO account VALUES (\"SELECT balance FROM Accounts WHERE account_number = ? AND security_pin = ?\")";
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM account WHERE accountNumber = ? AND CustomerId=?")) {
+        String query = "INSERT INTO account VALUES (?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query )) {
 
             preparedStatement.setString(1, account.getAccountNumber());
             preparedStatement.setInt(2,account.getCustomer().getCustomerId());
             System.out.println("Balance Check successfully .. : " + account);
-            ResultSet resultSet = preparedStatement.executeQuery();
 
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 double balance = resultSet.getDouble("balance");
                 System.out.println("Balance is : " + balance);
@@ -303,6 +337,7 @@ public class AccountRepository {
         return account;
     }
 
+
 }
 
 
@@ -311,48 +346,5 @@ public class AccountRepository {
 
 
 
-
-       // Method to update user data into the database
-//        public boolean updateAccount(Account account) throws SQLException {
-//            this.initConnection();
-//
-//            String query = "UPDATE opennewaccount SET   AccountNumber= ?, AccountHolderName= ?, Balance = ?,Amount()";
-//            try (PreparedStatement preparedStatement = connection.prepareStatement(query))
-//            {
-//                preparedStatement.setString(1, account.getAccountNumber());
-//                preparedStatement.setString(2, account.getAccountHolderName());
-//                preparedStatement.setDouble(3, account.getBalance());
-//                preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
-//
-//                System.out.println("updating  Account data to table: " + account);
-//
-//                int rowsInserted = preparedStatement.executeUpdate();
-//
-//                return rowsInserted > 0;
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//            return false;
-//        }
-//
-//        // Method to delete user data into the database
-//        public boolean deleteSavingAccount(long CardId) throws SQLException {
-//            this.initConnection();
-//
-//            String query = "DELETE FROM savingaccount WHERE CardId = ?";
-//            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//                preparedStatement.setLong(1,CardId);
-//
-//                System.out.println("deleting saving account Successfully..: " + CardId);
-//
-//                int rowsInserted = preparedStatement.executeUpdate();
-//
-//                return rowsInserted > 0;
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//            return false;
-//        }
-//    }
 
 
