@@ -2,6 +2,8 @@ package com.swsa.service;
 import com.swsa.model.Account;
 import com.swsa.model.Customer;
 import com.swsa.repository.AccountRepository;
+import com.swsa.repository.CustomerRepository;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -10,11 +12,12 @@ public class AccountService {
 
     private static final AccountRepository ACCOUNT_REPOSITORY = new AccountRepository();
 
-
+    private static final CustomerRepository CUSTOMER_REPOSITORY = new CustomerRepository();
 
     public List<Account> retrieveAccount() {
         return (List<Account>) ACCOUNT_REPOSITORY.retrieveAccount();
     }
+
 
         public static void insertAccount() throws SQLException {
         Scanner scanner = new Scanner(System.in);
@@ -32,7 +35,7 @@ public class AccountService {
         int customerId = Integer.parseInt(scanner1.nextLine());
         scanner.nextLine();  // Consume newline
 
-        Customer customer = ACCOUNT_REPOSITORY.retrieverCustomer(customerId);
+        Customer customer = CUSTOMER_REPOSITORY.retrieveCustomer(customerId);
         Account account1 = new Account(accountNumber, accountHolderName, balance, customer);
 
         try {
@@ -46,8 +49,9 @@ public class AccountService {
         }
 
     }
+
 /*
-    public static void depositMoney() {
+    public static void insertdepositMoney() {
         double amount;
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
@@ -65,7 +69,7 @@ public class AccountService {
         }
 
         try {
-            if (ACCOUNT_REPOSITORY.depositMoney(account)) {
+            if (ACCOUNT_REPOSITORY.insertdepositMoney(account)) {
                 System.out.println(" Deposit Amount  successfully!");
             } else {
                 System.out.println(" Account not Open .");
@@ -75,7 +79,8 @@ public class AccountService {
         }
 
     }
-}
+
+
 
     public void withdrawMoney() {
     }
@@ -93,13 +98,10 @@ public class AccountService {
         scanner.nextLine();  // Consume newline
         Account account3 = new Account(accountNumber, amount);
 
-        if (amount > 0 && account3.getBalance() >= amount)
-        {
+        if (amount > 0 && account3.getBalance() >= amount) {
             account3.setBalance(account3.getBalance() - amount);
             System.out.println("Withdrew $" + amount + " from account " + account3.getAccountNumber());
-        }
-        else if (amount > 0 && account3.getBalance() < amount)
-        {
+        } else if (amount > 0 && account3.getBalance() < amount) {
             System.out.println("Insufficient funds for withdrawal.");
         } else {
             System.out.println("Withdrawal amount must be positive.");
@@ -115,30 +117,31 @@ public class AccountService {
             throw new RuntimeException(e);
         }
 
-    }
-    public double checkBalance() {
-        return 0;
-    }
-    public static double checkBalance(Account account)
 
-    {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter account number: ");
-        String accountNumber = scanner.nextLine();
-       // scanner.nextLine();  // Consume newline
-        Account account4 = new Account(accountNumber);
-        scanner.nextLine();  // Consume newline
-        double balance = checkBalance(account);
-        System.out.println("The current balance for account " + account.getAccountNumber() + " is $" + balance);
-        System.out.println("The balance of account " + account.getAccountNumber() + " is $" + account.getBalance());
-        return account4.getBalance();
+        public double checkBalance () {
+            return 0;
+        }
+
+        public static double checkBalance (Account account)
+        {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter account number: ");
+            String accountNumber = scanner.nextLine();
+            // scanner.nextLine();  // Consume newline
+            Account account4 = new Account(accountNumber);
+            scanner.nextLine();  // Consume newline
+            double balance = checkBalance(account);
+            System.out.println("The current balance for account " + account.getAccountNumber() + " is $" + balance);
+            System.out.println("The balance of account " + account.getAccountNumber() + " is $" + account.getBalance());
+            return account4.getBalance();
+
+        }
 
     }
-
 */
 
-
 }
+
 
 
 
