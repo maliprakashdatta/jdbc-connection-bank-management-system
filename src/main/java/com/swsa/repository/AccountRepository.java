@@ -68,7 +68,7 @@ public class AccountRepository {
             preparedStatement.setString(1, account.getAccountNumber());
             preparedStatement.setString(2, account.getAccountHolderName());
             preparedStatement.setDouble(3, account.getBalance());
-            preparedStatement.setInt(4, account.getCustomer().getCustomerId());
+            preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
             System.out.println("  Account created  data successfully .. : " + account);
 
             int rowsInserted = preparedStatement.executeUpdate();
@@ -90,7 +90,8 @@ public class AccountRepository {
             preparedStatement.setString(1, account.getAccountNumber());
             preparedStatement.setString(2, account.getAccountHolderName());
             preparedStatement.setDouble(3, account.getBalance());
-            preparedStatement.setInt(4, account.getCustomer().getCustomerId());
+            preparedStatement.setInt(4,account.getCustomer().getCustomerId());
+
 
             System.out.println("updating  Account data to table: " + account);
 
@@ -194,7 +195,7 @@ public class AccountRepository {
             System.out.println("  Account created  data successfully .. : " + account);
 
             System.out.println("Withdraw Amount successfully .. : " + account);
-/*
+
             if (amount > 0 && account.getBalance() >= amount) {
                 account.setBalance(account.getBalance() - amount);
                 System.out.println("Withdrew $" + amount + " from account " + account.getAccountNumber());
@@ -202,7 +203,7 @@ public class AccountRepository {
                 System.out.println("Insufficient funds for withdrawal.");
             } else {
                 System.out.println("Withdrawal amount must be positive.");
-            }*/
+            }
             int rowsInserted = preparedStatement.executeUpdate();
 
             return rowsInserted > 0;
@@ -237,28 +238,36 @@ public class AccountRepository {
 
 
 
-/*
+//=====================================================
 //----------------CHECK BALANCE-------------
+//===========================================================
+
 
     // Method to update user data into the database
-    public boolean checkBalance(Account account) throws SQLException {
+    public boolean getBalance(Account account) throws SQLException {
         this.initConnection();
-        String query = "INSERT INTO account VALUES (?,)";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        //String query = "INSERT INTO account VALUES (\"SELECT balance FROM Accounts WHERE account_number = ? AND security_pin = ?\")";
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM account WHERE accountNumber = ? AND CustomerId=?")) {
 
             preparedStatement.setString(1, account.getAccountNumber());
-
+            preparedStatement.setInt(2,account.getCustomer().getCustomerId());
             System.out.println("Balance Check successfully .. : " + account);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            int rowsInserted = preparedStatement.executeUpdate();
-
-            return rowsInserted > 0;
+            if (resultSet.next()) {
+                double balance = resultSet.getDouble("balance");
+                System.out.println("Balance is : " + balance);
+            } else {
+                System.out.println("CustomerId!");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-*/
+//==================================================================
+    //==========================retrieveAccount==============
+    //===========================================================
 
     public Account retrieveAccount() {
         Account account = null;
