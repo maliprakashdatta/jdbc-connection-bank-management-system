@@ -3,10 +3,6 @@ import com.swsa.model.Account;
 import com.swsa.model.Customer;
 import com.swsa.repository.AccountRepository;
 import com.swsa.repository.CustomerRepository;
-
-import javax.net.ssl.SSLContext;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -92,7 +88,7 @@ public class AccountService {
 
     }
 
-  //==========================================
+    //==========================================
 //===================Withdraw Amount =================================
     //========================================
     public void withdrawMoney() {
@@ -131,9 +127,9 @@ public class AccountService {
     }
 
 
-        public double checkBalance () {
-            return 0;
-        }
+    public double checkBalance () {
+        return 0;
+    }
 
 
     public void getBalance() {
@@ -179,7 +175,6 @@ public class AccountService {
 
         }
 */
-
 
 
 
