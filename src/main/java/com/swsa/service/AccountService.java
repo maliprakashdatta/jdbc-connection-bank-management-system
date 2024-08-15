@@ -18,7 +18,7 @@ public class AccountService {
     }
 
 
-        public static void insertAccount() throws SQLException {
+    public static void insertAccount() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
@@ -26,7 +26,7 @@ public class AccountService {
         System.out.print("Enter account holder name: ");
         String accountHolderName = scanner.nextLine();
 
-        System.out.print("Enter initial deposit amount: ");
+        System.out.print("Enter initial(Opening)deposit amount: ");
         double balance = scanner.nextDouble();
 
         Scanner scanner1 = new Scanner(System.in);
@@ -49,27 +49,37 @@ public class AccountService {
 
     }
 
-/*
-    public static void insertdepositMoney() {
-        double amount;
+    //==================Deposit================================
+
+    public static void insertdepositMoney() throws SQLException {
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter account number: ");
         String accountNumber = scanner.nextLine();
-        System.out.print("Enter deposit amount: ");
-        amount = scanner.nextDouble();
-        scanner.nextLine();
-        Account account = new Account(accountNumber, amount);
 
-        if (amount > 0) {
-            account.setBalance(account.getBalance() + amount);
-            System.out.println("Deposited $" + amount + " into account " + account.getAccountNumber());
+        System.out.print("Enter account holder name: ");
+        String accountHolderName = scanner.nextLine();
+
+        System.out.print("Enter Add deposit amount: ");
+        double amount = scanner.nextDouble();
+
+        Scanner scanner1 = new Scanner(System.in);
+        System.out.println("Pls enter Customer ID:");
+        int customerId = Integer.parseInt(scanner1.nextLine());
+        scanner.nextLine();  // Consume newline
+
+        Customer customer = CUSTOMER_REPOSITORY.retrieveCustomer(customerId);
+        Account account1 = new Account(accountNumber, accountHolderName, amount, customer);
+
+        if ( amount > 0) {
+            account1.setBalance(account1.getBalance() + amount);
+            System.out.println("Deposited $" + amount + " into account " + account1.getAccountNumber());
         } else {
             System.out.println("Deposit amount must be positive.");
         }
-
         try {
-            if (ACCOUNT_REPOSITORY.insertdepositMoney(account)) {
-                System.out.println(" Deposit Amount  successfully!");
+            if (ACCOUNT_REPOSITORY.insertAccount(account1)) {
+                System.out.println(" Deposit Amount   successfully!");
             } else {
                 System.out.println(" Account not Open .");
             }
@@ -115,8 +125,9 @@ public class AccountService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
-
+/*
         public double checkBalance () {
             return 0;
         }
@@ -138,8 +149,8 @@ public class AccountService {
 
     }
 */
-
 }
+
 
 
 
