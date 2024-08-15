@@ -7,13 +7,13 @@ public class Account {
     double balance;
     Customer customer;
 
-    public Account(String accountNumber, String accountHolderName, double balance) {
+    public Account(String accountNumber) {
     }
 
     public Account(String accountNumber, Customer amount) {
     }
 
-    public Account(String accountNumber) {
+    public Account(String accountNumber, int customerId) {
     }
     public Account(String accountNumber, String accountHolderName, double balance, int customerId) {
     }
