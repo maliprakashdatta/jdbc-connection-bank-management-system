@@ -10,7 +10,7 @@ public class Account {
     public Account(String accountNumber, String accountHolderName, double balance) {
     }
 
-    public Account(String accountNumber, double amount) {
+    public Account(String accountNumber, Customer amount) {
     }
 
     public Account(String accountNumber) {
