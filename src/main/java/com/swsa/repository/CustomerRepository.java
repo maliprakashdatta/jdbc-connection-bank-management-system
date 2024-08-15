@@ -90,7 +90,7 @@ public class CustomerRepository {
             this.initConnection();
             // Your database operations here...
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM address where address_id = " + customer);
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM account where customerId = " + customerId);
             // Iterate over the result set
             while (resultSet.next()) {
                 int Id = resultSet.getInt("customerId");
