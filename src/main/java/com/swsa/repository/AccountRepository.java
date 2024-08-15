@@ -6,9 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 public class AccountRepository {
-
-
-    private static Connection connection = null;
+    private Connection connection = null;
 
     private void initConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
@@ -20,9 +18,7 @@ public class AccountRepository {
         return null;
     }
 
-    public List<Account> retrieverAccount()
-
-    {
+    public List<Account> retrieverAccount() {
         List<Account> accounts = new ArrayList<>();
         // Use the connection to execute SQL queries and interact with the database
         try {
@@ -58,6 +54,7 @@ public class AccountRepository {
     }
 
 
+
     // Method to update user data into the database
     public boolean insertAccount(Account account) throws SQLException {
         this.initConnection();
@@ -79,9 +76,8 @@ public class AccountRepository {
         return false;
     }
 
-    public Account retrieveAccount()
-    {
-       Account   account = null;
+    public Account retrieveAccount() {
+        Account account = null;
         // Use the connection to execute SQL queries and interact with the database
         try {
             this.initConnection();
@@ -97,7 +93,7 @@ public class AccountRepository {
                 int customerId = resultSet.getInt("customerId");
 
                 // Do something with the data, e.g., print it
-                 account = new Account(accountNumber, accountHolderName, balance, customerId);
+                account = new Account(accountNumber, accountHolderName, balance, customerId);
             }
         } catch (SQLException e) {
             System.err.println("SQL error: " + e.getMessage());
@@ -111,10 +107,10 @@ public class AccountRepository {
                 }
             }
         }
-        return  account;
+        return account;
     }
 
-
+/*
     // Method to update user data into the database
     public boolean updateAccount(Account account) throws SQLException {
         this.initConnection();
@@ -135,75 +131,68 @@ public class AccountRepository {
             e.printStackTrace();
         }
         return false;
-    }
+    }*/
+/*
 
     public Object insertAccount(int customerId) {
         return null;
     }
-}
 
-
-
-
-/*
-
-
-
-
+//============================================================================
     //---------------DEPOSIT ACOUNT-----------------------------
-
+//=============================================================================
+public void Account(String accountNumber, double amount) {
+}
     public List<Account> retrieveDeposit()
+
     {
-    List<Account> accounts = new ArrayList<>();
-    // Use the connection to execute SQL queries and interact awith the database
+        List<Account> accounts = new ArrayList<>();
+
+        // Use the connection to execute SQL queries and interact awith the database
         try {
-        this.initConnection();
+            this.initConnection();
 
-        // Your database operations here...
-        Statement statement = connection.createStatement();
-        ResultSet ResultSet1 = statement.executeQuery("SELECT * FROM account");
+            // Your database operations here...
+            Statement statement = connection.createStatement();
+            ResultSet ResultSet1 = statement.executeQuery("SELECT * FROM deposit");
 
-        // Iterate over the result set
-        while (ResultSet1.next()) {
-            String accountNumber = ResultSet1.getString("AccountNumber");
-            double balance = ResultSet1.getDouble("balance");
+            // Iterate over the result set
+            while (ResultSet1.next()) {
+                String accountNumber = ResultSet1.getString("AccountNumber");
+                double balance = ResultSet1.getDouble("balance");
 
-
-            // Do something with the data, e.g., print it
-            Account account = new Account(accountNumber, balance);
-            accounts.add(account);
-        }
-    } catch (SQLException e) {
-        System.err.println("SQL error: " + e.getMessage());
-    } finally {
-        // Close the connection when done
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                System.err.println("Error closing connection: " + e.getMessage());
+                // Do something with the data, e.g., print it
+                Account account = new Account(accountNumber, balance);
+                accounts.add(account);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL error: " + e.getMessage());
+        } finally {
+            // Close the connection when done
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Error closing connection: " + e.getMessage());
+                }
             }
         }
-    }
         return accounts;
-}
+    }
 
 
-
-
-
-// Method to update user data into the database
-    public boolean depositMoney(Account account) throws SQLException {
+    // Method to update user data into the database
+    public boolean insertdepositMoney(Account account1) throws SQLException {
         this.initConnection();
-        int balance=0;
-        String query = "INSERT INTO account VALUES (?, ?)";
+        int balance = 0;
+        String query = "INSERT INTO deposit VALUES (?, ?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            preparedStatement.setString(1, account.getAccountNumber());
-            preparedStatement.setDouble(2, account.getBalance());
+            preparedStatement.setString(1, account1.getAccountNumber());
+            preparedStatement.setDouble(2, account1.getBalance());
             // preparedStatement.setDouble(4, account.getCustomer().getCustomerId());
 
-           System.out.println("insert  data successfully .... : " + account);
+            System.out.println("insert  data successfully .... : " + account1);
 
             int rowsInserted = preparedStatement.executeUpdate();
 
@@ -214,7 +203,40 @@ public class AccountRepository {
         return false;
     }
 
-/*
+    public Account retrieverDeposit() {
+        Account account = null;
+        // Use the connection to execute SQL queries and interact with the database
+        try {
+            this.initConnection();
+            // Your database operations here...
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM deposit where accountNumber = " + account);
+            // Iterate over the result set
+            while (resultSet.next()) {
+
+                String accountNumber = resultSet.getString("AccountNumber");
+                double balance = resultSet.getLong("balance");
+
+
+                // Do something with the data, e.g., print it
+                account = new Account(accountNumber, balance);
+            }
+        } catch (SQLException e) {
+            System.err.println("SQL error: " + e.getMessage());
+        } finally {
+            // Close the connection when done
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.err.println("Error closing connection: " + e.getMessage());
+                }
+            }
+        }
+        return account;
+    }
+
+
 //---------------Withdraw Amount -----------------------------
 
     // Method to update user data into the database
@@ -241,33 +263,35 @@ public class AccountRepository {
 
 //----------------CHECK BALANCE-------------
 
-// Method to update user data into the database
-public boolean  checkBalance(Account account) throws SQLException {
-    this.initConnection();
-    String query = "INSERT INTO account VALUES (?,)";
-    try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+    // Method to update user data into the database
+    public boolean checkBalance(Account account) throws SQLException {
+        this.initConnection();
+        String query = "INSERT INTO account VALUES (?,)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-        preparedStatement.setString(1, account.getAccountNumber());
+            preparedStatement.setString(1, account.getAccountNumber());
 
-        System.out.println("Balance Check successfully .. : " + account);
+            System.out.println("Balance Check successfully .. : " + account);
 
-        int rowsInserted = preparedStatement.executeUpdate();
+            int rowsInserted = preparedStatement.executeUpdate();
 
-        return rowsInserted > 0;
-    } catch (SQLException e) {
-        e.printStackTrace();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
-    return false;
-}
-
-}
-
 */
 
 
+}
 
 
-//}
+
+
+
+
+//
 //
 //        // Method to update user data into the database
 //        public boolean updateAccount(Account account) throws SQLException {
